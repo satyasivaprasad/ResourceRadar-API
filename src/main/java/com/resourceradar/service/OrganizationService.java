@@ -5,7 +5,7 @@ import java.util.List;
 import com.resourceradar.entity.Organization;
 import org.springframework.stereotype.Service;
 
-import com.resourceradar.DTO.OrganizationDTO;
+import com.resourceradar.dto.OrganizationDTO;
 
 import jakarta.servlet.http.HttpServletRequest;
 

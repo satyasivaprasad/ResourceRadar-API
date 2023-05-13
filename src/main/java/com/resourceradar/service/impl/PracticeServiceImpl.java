@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.resourceradar.DTO.PracticeDTO;
+import com.resourceradar.dto.PracticeDTO;
 import com.resourceradar.entity.Practice;
 import com.resourceradar.exception.PracticeNotFoundException;
 import com.resourceradar.service.PracticeService;

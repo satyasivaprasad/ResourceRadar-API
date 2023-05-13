@@ -1,6 +1,6 @@
 package com.resourceradar.controller;
 
-import com.resourceradar.DTO.ClientDto;
+import com.resourceradar.dto.ClientDto;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Client;
 import com.resourceradar.service.impl.ClientServiceImpl;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.resourceradar.DTO.OrganizationDTO;
+import com.resourceradar.dto.OrganizationDTO;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Organization;
 import com.resourceradar.service.impl.OrganizationServiceImpl;

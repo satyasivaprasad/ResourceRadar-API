@@ -12,11 +12,11 @@ import com.resourceradar.repository.DesignationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.resourceradar.DTO.DepartmentDTO;
-import com.resourceradar.DTO.DesignationDTO;
-import com.resourceradar.DTO.OrganizationDTO;
-import com.resourceradar.DTO.PracticeDTO;
-import com.resourceradar.DTO.SkillsDTO;
+import com.resourceradar.dto.DepartmentDTO;
+import com.resourceradar.dto.DesignationDTO;
+import com.resourceradar.dto.OrganizationDTO;
+import com.resourceradar.dto.PracticeDTO;
+import com.resourceradar.dto.SkillsDTO;
 import com.resourceradar.entity.Departments;
 import com.resourceradar.repository.DepartmentRepository;
 import com.resourceradar.repository.OrganizationRepository;

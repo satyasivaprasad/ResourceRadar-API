@@ -4,7 +4,7 @@ package com.resourceradar.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.resourceradar.DTO.EmployeeDTO;
+import com.resourceradar.dto.EmployeeDTO;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Employee;
 import com.resourceradar.entity.EmployeeAudit;

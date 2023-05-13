@@ -2,7 +2,7 @@ package com.resourceradar.controller;
 
 import java.util.List;
 
-import com.resourceradar.DTO.PracticeDTO;
+import com.resourceradar.dto.PracticeDTO;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.exception.PracticeNotFoundException;
 import io.swagger.v3.oas.annotations.tags.Tag;

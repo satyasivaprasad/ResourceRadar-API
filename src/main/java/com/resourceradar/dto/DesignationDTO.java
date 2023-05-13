@@ -1,4 +1,4 @@
-package com.resourceradar.DTO;
+package com.resourceradar.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SkillsDTO {
+public class DesignationDTO {
 
-	private String id;
+    private String id;
 
-	private String name;
+    private String name;
 
 
 }

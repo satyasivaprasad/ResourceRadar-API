@@ -1,4 +1,4 @@
-package com.resourceradar.DTO;
+package com.resourceradar.dto;
 
 import com.resourceradar.entity.Departments;
 import lombok.Data;

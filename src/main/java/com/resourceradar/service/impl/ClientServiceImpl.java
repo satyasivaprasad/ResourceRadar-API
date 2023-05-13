@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.resourceradar.DTO.ManagerDto;
+import com.resourceradar.dto.ManagerDto;
 import com.resourceradar.entity.Manager;
 import com.resourceradar.enums.ClientStatus;
-import com.resourceradar.DTO.ClientDto;
-import com.resourceradar.DTO.ProjectDTO;
+import com.resourceradar.dto.ClientDto;
+import com.resourceradar.dto.ProjectDTO;
 import com.resourceradar.entity.Project;
 import com.resourceradar.repository.ManagerRepository;
 import com.resourceradar.service.ClientService;
