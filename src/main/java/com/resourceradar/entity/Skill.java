@@ -1,9 +1,14 @@
 package com.resourceradar.entity;
 
+import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -15,12 +20,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "departments")
-@Setter
+@Table(name = "skills")
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
-public class Departments extends AuditableEntity {
+@AllArgsConstructor
+public class Skill extends Auditable {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -30,16 +35,8 @@ public class Departments extends AuditableEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "email_alias", nullable = false)
-	private String email;
-
-	@Column(name = "org_id")
-	private String orgId;
-
-	@Column(name = "type", nullable = false)
-	private String type;
-
-	@ManyToOne
-	@JoinColumn(name = "parent_department_id")
-	private Departments parentDepartment;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
+	@JoinColumn(name = "org_id")
+	@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
+	private Organization organization;
 }

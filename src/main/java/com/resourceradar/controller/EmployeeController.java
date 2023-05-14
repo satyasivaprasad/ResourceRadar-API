@@ -4,11 +4,9 @@ package com.resourceradar.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.resourceradar.dto.EmployeeDTO;
+import com.resourceradar.dto.EmployeeDto;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Employee;
-import com.resourceradar.entity.EmployeeAudit;
-import com.resourceradar.enums.EmployeeAuditEvent;
 import com.resourceradar.exception.CustomValidationException;
 import com.resourceradar.repository.EmployeeAuditRepository;
 import com.resourceradar.repository.EmployeeRepository;
@@ -22,8 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(EndPointConfig.API_V1 + EndPointConfig.EMPLOYEE)
@@ -40,7 +36,7 @@ public class EmployeeController {
     private EmployeeAuditRepository employeeAuditRepository;
 
     @PostMapping()
-    public String createEmployee(@RequestBody @Validated EmployeeDTO employeeDTO, HttpServletRequest request) throws JsonProcessingException {
+    public String createEmployee(@RequestBody @Validated EmployeeDto employeeDTO, HttpServletRequest request) throws JsonProcessingException {
         try {
             Validator.isValidate(employeeDTO);
             Employee employee = employeeRepository.findByOrgEmpId(employeeDTO.getOrgEmpId());
@@ -48,7 +44,9 @@ public class EmployeeController {
                 Employee emp = employeeService.createEmployee(employeeDTO, request);
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
-                String jsonData = mapper.writeValueAsString(emp);
+
+               /*
+                               String jsonData = mapper.writeValueAsString(emp);
                 EmployeeAudit employeeAudit = new EmployeeAudit();
                 employeeAudit.setData(jsonData);
                 employeeAudit.setEmpId(emp.getOrgEmpId());
@@ -56,6 +54,8 @@ public class EmployeeController {
                 employeeAudit.setOrgId(request.getHeader("FL"));
                 employeeAudit.setEventDate(LocalDateTime.now());
                 employeeAuditRepository.save(employeeAudit);
+
+                */
 
             } else {
                 return "employee org id already exists " + employee.getOrgEmpId();

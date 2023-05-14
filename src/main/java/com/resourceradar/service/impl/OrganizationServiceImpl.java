@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.resourceradar.entity.Designation;
 import com.resourceradar.entity.Organization;
 import com.resourceradar.entity.Practice;
-import com.resourceradar.entity.Skills;
+import com.resourceradar.entity.Skill;
 import com.resourceradar.repository.DesignationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import com.resourceradar.dto.DesignationDTO;
 import com.resourceradar.dto.OrganizationDTO;
 import com.resourceradar.dto.PracticeDTO;
 import com.resourceradar.dto.SkillsDTO;
-import com.resourceradar.entity.Departments;
+import com.resourceradar.entity.Department;
 import com.resourceradar.repository.DepartmentRepository;
 import com.resourceradar.repository.OrganizationRepository;
 import com.resourceradar.repository.PracticeRepository;
@@ -64,14 +64,14 @@ public class OrganizationServiceImpl implements OrganizationService {
 			org.setName(orgOpt.get().getName());
 		}
 
-		List<Departments> departments = departmentRepository.findAll();
+		List<Department> departments = departmentRepository.findAll();
 
 		List<DepartmentDTO> departmentDTOs = new ArrayList<>();
 
 		if (!departments.isEmpty()) {
 			 log.info("checking is department empty ");
 
-			for (Departments department : departments) {
+			for (Department department : departments) {
 
 				DepartmentDTO departmentDTO = new DepartmentDTO();
 				departmentDTO.setId(department.getId());
@@ -114,10 +114,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 		}
 */		org.setPractices(practiceDTOs);
 
-		List<Skills> skills = skillsRepository.findAll();
+		List<Skill> skills = skillsRepository.findAll();
 		List<SkillsDTO> skillsDTOs = new ArrayList<>();
 		if (!skills.isEmpty()) {
-			for (Skills skill : skills) {
+			for (Skill skill : skills) {
 				SkillsDTO skillsDTO = new SkillsDTO();
 				skillsDTO.setId(skill.getId());
 				skillsDTO.setName(skill.getName());

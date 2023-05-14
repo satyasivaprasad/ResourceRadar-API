@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.resourceradar.entity.Departments;
+import com.resourceradar.entity.Department;
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Departments, String> {
+public interface DepartmentRepository extends JpaRepository<Department, String> {
 
-	List<Departments> findByNameContainingIgnoreCase(String name);
+	List<Department> findByNameContainingIgnoreCase(String name);
 
 }

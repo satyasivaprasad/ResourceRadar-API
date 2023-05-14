@@ -2,16 +2,27 @@ package com.resourceradar.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
-@Table(name = "employees_tbl")
-@Data
-public class Employee {
+@Table(name = "employees")
+@NamedQueries({
+        @NamedQuery(name = "Employee.findAll", query = "select e from Employee e")
+})
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -19,7 +30,7 @@ public class Employee {
     private String id;
 
     @Column(name = "org_id")
-    private  String orgId;
+    private String orgId;
 
     @Column(name = "org_emp_id")
     private String orgEmpId;
@@ -57,17 +68,9 @@ public class Employee {
     @Column(name = "status")
     private String status;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reporting_manager_id")
-    private Employee reportingManager;
-
-
-     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
-    private Departments department;
-
-
+    private Department department;
 
     @Column(name = "gender")
     private String gender;
@@ -96,5 +99,15 @@ public class Employee {
     @Column(name = "modifiedTime")
     private LocalDateTime modifiedTime;
 
-    // Constructors, getters and setters, and other methods omitted for brevity
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="employee", cascade = CascadeType.ALL)
+    public List<EmployeeSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<EmployeeSkill> employeeSkills) {
+        this.skills = employeeSkills;
+    }
+
+    @ElementCollection
+    private List<EmployeeSkill> skills = new LinkedList<EmployeeSkill>();
 }

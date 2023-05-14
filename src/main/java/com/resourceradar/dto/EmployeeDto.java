@@ -1,12 +1,15 @@
 package com.resourceradar.dto;
 
-import com.resourceradar.entity.Departments;
+import com.resourceradar.entity.Department;
+import com.resourceradar.entity.Skill;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
-public class EmployeeDTO {
+public class EmployeeDto {
 
     private String orgEmpId;
     private String firstName;
@@ -21,7 +24,7 @@ public class EmployeeDTO {
     private String contactNumber;
     private String status;
 
-    private Departments departments;
+    private Department department;
     private String gender;
     private String location;
     private String nickname;
@@ -32,4 +35,5 @@ public class EmployeeDTO {
     private String modifiedBy;
     private LocalDateTime modifiedTime;
 
+    private Set<EmployeeSkillsDto> skills = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package com.resourceradar.entity;
 
+import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Designation extends AuditableEntity {
+public class Designation extends Auditable {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
