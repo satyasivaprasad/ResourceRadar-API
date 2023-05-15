@@ -4,14 +4,14 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.resourceradar.dto.PracticeDTO;
-import com.resourceradar.entity.Practice;
-import com.resourceradar.exception.PracticeNotFoundException;
-import com.resourceradar.service.PracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.resourceradar.DTO.PracticeDTO;
+import com.resourceradar.entity.Practice;
+import com.resourceradar.exception.PracticeNotFoundException;
 import com.resourceradar.repository.PracticeRepository;
+import com.resourceradar.service.PracticeService;
 
 @Service
 public class PracticeServiceImpl implements PracticeService {
@@ -30,9 +30,13 @@ public class PracticeServiceImpl implements PracticeService {
 			System.out.println("=========================================="+practices);
 //			return practices.stream().map(this::convertToDto).collect(Collectors.toList());
 			List<PracticeDTO> practiceDTOs= new ArrayList<>();
-			PracticeDTO pDto= new PracticeDTO();
 			for(Practice p: practices) {
-			//	pDto=convertToDto(p);
+				PracticeDTO pDto= new PracticeDTO();
+				pDto.setId(p.getId());
+				pDto.setName(p.getName());
+				pDto.setOrgId(p.getOrgId());
+				pDto.setCreatedDateTime(p.getCreatedDate());
+				pDto.setModifiedDateTime(p.getModifiedDate());
 				practiceDTOs.add(pDto);
 			}
 			return practiceDTOs;

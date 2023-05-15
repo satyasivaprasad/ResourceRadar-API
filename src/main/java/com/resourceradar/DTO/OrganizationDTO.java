@@ -1,4 +1,4 @@
-package com.resourceradar.dto;
+package com.resourceradar.DTO;
 
 import java.util.List;
 

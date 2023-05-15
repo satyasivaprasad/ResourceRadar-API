@@ -43,11 +43,12 @@ public class EmployeeAllocation {
     @JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
     private Project project;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    @JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
+    @JsonIgnoreProperties
     private Client client;
-
+    
     @Column(name = "is_primary")
     private boolean isPrimary;
     

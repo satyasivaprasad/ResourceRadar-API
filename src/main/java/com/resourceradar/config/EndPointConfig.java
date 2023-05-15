@@ -36,5 +36,7 @@ public class EndPointConfig extends Object {
 	public static final String EMPLOYEE_ALLOCATIONS = "/employeeallocations";
 
 	public static final String ID = "/{id}";
+	
+	public static final String EMPLOYEE="/employee";
 
 }

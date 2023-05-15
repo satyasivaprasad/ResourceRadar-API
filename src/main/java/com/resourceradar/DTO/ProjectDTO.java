@@ -1,19 +1,21 @@
-package com.resourceradar.dto;
+package com.resourceradar.DTO;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-public class ClientDto {
+public class ProjectDTO {
     private String id;
 
 
     private String name;
 
 
-    private String status;
+    private String type;
+
+
+    private String clientId;
 
 
     private String orgId;
@@ -24,8 +26,9 @@ public class ClientDto {
 
     private LocalDateTime endDate;
 
-    private List<ProjectDTO> projects;
 
-    private ManagerDto managerDto;
+
+
+
 
 }

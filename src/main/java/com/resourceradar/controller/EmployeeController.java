@@ -1,10 +1,18 @@
 package com.resourceradar.controller;
 
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.resourceradar.dto.EmployeeDTO;
+import com.resourceradar.DTO.EmployeeDTO;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Employee;
 import com.resourceradar.entity.EmployeeAudit;
@@ -14,16 +22,9 @@ import com.resourceradar.repository.EmployeeAuditRepository;
 import com.resourceradar.repository.EmployeeRepository;
 import com.resourceradar.service.impl.EmployeeServiceImpl;
 import com.resourceradar.utils.Validator;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(EndPointConfig.API_V1 + EndPointConfig.EMPLOYEE)

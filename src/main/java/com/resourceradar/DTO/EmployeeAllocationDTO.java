@@ -1,4 +1,4 @@
-package com.resourceradar.dto;
+package com.resourceradar.DTO;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class EmployeeAllocationDTO {
 	
-private String id;
+	private String id;
     
     private String employeeId;
 

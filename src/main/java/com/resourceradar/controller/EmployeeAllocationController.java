@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.resourceradar.DTO.EmployeeAllocationDTO;
 import com.resourceradar.config.EndPointConfig;
-import com.resourceradar.dto.EmployeeAllocationDTO;
 import com.resourceradar.entity.EmployeeAllocation;
 import com.resourceradar.exception.EmployeeAllocationNotFoundException;
 import com.resourceradar.service.EmployeeAllocationService;

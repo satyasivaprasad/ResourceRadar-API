@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.resourceradar.dto.EmployeeAllocationDTO;
+import com.resourceradar.DTO.EmployeeAllocationDTO;
 import com.resourceradar.entity.Client;
 import com.resourceradar.entity.Employee;
 import com.resourceradar.entity.EmployeeAllocation;

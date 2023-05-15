@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.resourceradar.dto.EmployeeAllocationDTO;
+import com.resourceradar.DTO.EmployeeAllocationDTO;
 import com.resourceradar.entity.EmployeeAllocation;
 import com.resourceradar.exception.EmployeeAllocationNotFoundException;
 

@@ -2,9 +2,9 @@ package com.resourceradar.service;
 
 import java.util.List;
 
-import com.resourceradar.dto.PracticeDTO;
 import org.springframework.stereotype.Service;
 
+import com.resourceradar.DTO.PracticeDTO;
 import com.resourceradar.exception.PracticeNotFoundException;
 
 @Service

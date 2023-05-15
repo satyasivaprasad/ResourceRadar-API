@@ -1,4 +1,4 @@
-package com.resourceradar.dto;
+package com.resourceradar.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

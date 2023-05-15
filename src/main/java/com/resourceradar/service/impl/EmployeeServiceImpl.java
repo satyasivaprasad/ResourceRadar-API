@@ -1,6 +1,6 @@
 package com.resourceradar.service.impl;
 
-import com.resourceradar.dto.EmployeeDTO;
+import com.resourceradar.DTO.EmployeeDTO;
 import com.resourceradar.entity.Employee;
 import com.resourceradar.repository.EmployeeRepository;
 import com.resourceradar.service.EmployeeService;

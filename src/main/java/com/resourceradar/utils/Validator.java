@@ -1,6 +1,6 @@
 package com.resourceradar.utils;
 
-import com.resourceradar.dto.EmployeeDTO;
+import com.resourceradar.DTO.EmployeeDTO;
 import com.resourceradar.exception.CustomValidationException;
 
 public class Validator {

@@ -1,11 +1,11 @@
-package com.resourceradar.dto;
-
-import lombok.Data;
+package com.resourceradar.DTO;
 
 import java.time.LocalDateTime;
 
+import lombok.Data;
+
 @Data
-public class ManagerDto {
+public class ManagerDTO {
 
    private String id;
 

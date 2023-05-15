@@ -1,6 +1,6 @@
 package com.resourceradar.service;
 
-import com.resourceradar.dto.EmployeeDTO;
+import com.resourceradar.DTO.EmployeeDTO;
 import com.resourceradar.entity.Employee;
 import jakarta.servlet.http.HttpServletRequest;
 

@@ -2,7 +2,6 @@ package com.resourceradar.controller;
 
 import java.util.List;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.resourceradar.dto.OrganizationDTO;
+import com.resourceradar.DTO.OrganizationDTO;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Organization;
 import com.resourceradar.service.impl.OrganizationServiceImpl;
 
-import jakarta.servlet.http.HttpServletRequest;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -26,11 +25,9 @@ public class OrganizationController {
 
 	@Autowired
 	private OrganizationServiceImpl organizationService;
-	
+
 	@Autowired
 	private OrganizationServiceImpl organizationServiceImpl;
-
-		
 
 	@GetMapping(EndPointConfig.ORGANIZATION_DETAILS)
 	public ResponseEntity<List<Organization>> getAllOrganizations() {
@@ -44,12 +41,9 @@ public class OrganizationController {
 	}
 
 	@GetMapping("/getorg")
-	public  ResponseEntity<OrganizationDTO>  getOrgCompleteDetails(HttpServletRequest request) {
-		
-		
+	public ResponseEntity<OrganizationDTO> getOrgCompleteDetails(String request) {
+
 		OrganizationDTO organizationDTO = organizationServiceImpl.getOrgCompleteDetails(request);
-		return  new ResponseEntity<OrganizationDTO>(organizationDTO, HttpStatus.ACCEPTED);
+		return new ResponseEntity<OrganizationDTO>(organizationDTO, HttpStatus.ACCEPTED);
 	}
 }
-	
-	
