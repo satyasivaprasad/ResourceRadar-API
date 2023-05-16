@@ -35,5 +35,15 @@ public class SkillsServiceImpl implements SkillsService {
 		return skills;
 
 	}
+	@Override
+	public Page<Skills> getAllSkills(Pageable pageable) throws SkillsNotFoundException {
+		return skillsRepository.findAll(pageable);
+	}
+
+
+	@Override
+	public Page<Skills> getSkillsListBasedOnName(String name, Pageable pageable) {
+		return skillsRepository.findByNameContainingIgnoreCase(name, pageable);
+	}
 
 }

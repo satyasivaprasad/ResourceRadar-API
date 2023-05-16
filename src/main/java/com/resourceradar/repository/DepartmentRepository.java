@@ -11,5 +11,21 @@ import com.resourceradar.entity.Department;
 public interface DepartmentRepository extends JpaRepository<Department, String> {
 
 	List<Department> findByNameContainingIgnoreCase(String name);
+	Page<Departments> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+	@Override
+	public Page<Departments> getAllDepartments(Pageable pageable) throws DepartmentNotFoundException {
+		return departmentRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Departments> getDepartmentListBasedOnName(String name, Pageable pageable) {
+		return departmentRepository.findByNameContainingIgnoreCase(name, pageable);
+	}
+
+	@Override
+	public Page<Departments> getDepartmentsByName(String name, Pageable pageable) {
+		return departmentRepository.findByNameContainingIgnoreCase(name, pageable);
+	}
 
 }

@@ -12,6 +12,9 @@ public interface DesignationService {
 
 	public List<Designation> getAllDesignation() throws DesignationNotFoundException;
 
-	List<Designation> getDesignationListBasedOnName(String name);
+	public List<Designation> getDesignationListBasedOnName(String name);
+
+	public Page<Designation> getAllDesignation(Pageable pageable) throws DesignationNotFoundException;
+
 
 }

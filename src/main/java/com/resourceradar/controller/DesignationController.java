@@ -47,5 +47,18 @@ public class DesignationController {
 		}
 
 	}
+	public ResponseEntity<Page<Designation>> getAllDesignation(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size
+	) throws DesignationNotFoundException {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Designation> designations = designationService.getAllDesignation(pageable);
+
+		if (designations.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(designations, HttpStatus.OK);
+		}
+	}
 
 }
