@@ -5,6 +5,8 @@ import java.util.List;
 import com.resourceradar.config.EndPointConfig;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,27 +37,27 @@ public class DepartmentController {
 		}
 	}
 
-    @GetMapping(EndPointConfig.DEPARTMENT_DETAILS_SEARCH)
-    public ResponseEntity<List<Department>> seachDeparmentBasedOnName(@RequestParam("query") String query)  throws DepartmentNotFoundException {
-        List<Department> skills = departmentService.getDepartmentListBasedOnName(query);
-
-        if (skills.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(skills, HttpStatus.OK);
-        }
-
-    }
-	@GetMapping
-	public ResponseEntity<Page<Departments>> getDepartmentsByName(
-			@RequestParam(defaultValue = "") String name,
-			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size
-	) {
-		Pageable pageable = PageRequest.of(page, size);
-		Page<Departments> departments = departmentService.getDepartmentsByName(name, pageable);
-		return ResponseEntity.ok(departments);
-	}
+//    @GetMapping(EndPointConfig.DEPARTMENT_DETAILS_SEARCH)
+//    public ResponseEntity<List<Department>> seachDeparmentBasedOnName(@RequestParam("query") String query)  throws DepartmentNotFoundException {
+//        List<Department> skills = departmentService.getDepartmentListBasedOnName(query);
+//
+//        if (skills.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } else {
+//      //      return new ResponseEntity<>(skills, HttpStatus.OK);
+//        }
+//
+//    }
+//	@GetMapping
+//	public ResponseEntity<Page<Departments>> getDepartmentsByName(
+//			@RequestParam(defaultValue = "") String name,
+//			@RequestParam(defaultValue = "0") int page,
+//			@RequestParam(defaultValue = "10") int size
+//	) {
+//		Pageable pageable = PageRequest.of(page, size);
+//		Page<Departments> departments = departmentService.getDepartmentsByName(name, pageable);
+//		return ResponseEntity.ok(departments);
+//	}
 
 
 

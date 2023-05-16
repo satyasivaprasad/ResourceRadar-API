@@ -47,18 +47,18 @@ public class PracticeController {
 //		}
         return null;
 	}
-	public ResponseEntity<Page<PracticeDTO>> getAllPractices (
-			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size
-	) throws PracticeNotFoundException {
-		Pageable pageable = PageRequest.of(page, size);
-		Page<PracticeDTO> practices = practiceService.getAllPractices(pageable);
-
-		if (practices.isEmpty()) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} else {
-			return ResponseEntity.status(HttpStatus.OK).body(practices);
-		}
-	}
+//	public ResponseEntity<Page<PracticeDTO>> getAllPractices (
+//			@RequestParam(defaultValue = "0") int page,
+//			@RequestParam(defaultValue = "10") int size
+//	) throws PracticeNotFoundException {
+//		Pageable pageable = PageRequest.of(page, size);
+//		Page<PracticeDTO> practices = practiceService.getAllPractices(pageable);
+//
+//		if (practices.isEmpty()) {
+//			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//		} else {
+//			return ResponseEntity.status(HttpStatus.OK).body(practices);
+//		}
+//	}
 
 }

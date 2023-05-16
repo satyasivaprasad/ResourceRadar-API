@@ -12,8 +12,8 @@ public interface DesignationRepository extends JpaRepository<Designation, String
 
 	List<Designation> findByNameContainingIgnoreCase(String name);
 
-	Page<Designation> findAll(Pageable pageable);
-
-	Page<Designation> findByNameContainingIgnoreCase(String name, Pageable pageable);
+//	Page<Designation> findAll(Pageable pageable);
+//
+//	Page<Designation> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
 }

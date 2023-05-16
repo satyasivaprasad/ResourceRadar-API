@@ -10,13 +10,13 @@ import com.resourceradar.exception.SkillsNotFoundException;
 @Service
 public interface SkillsService {
 
-	public List<Skills> getAllSkills() throws SkillsNotFoundException;
-
-	public List<Skills> getSkillsListBasedOnName(String name);
-
-
-	public Page<Skills> getAllSkills(Pageable pageable) throws SkillsNotFoundException;
-
-	public Page<Skills> getSkillsListBasedOnName(String name, Pageable pageable);
+//	public List<Skills> getAllSkills() throws SkillsNotFoundException;
+//
+//	public List<Skills> getSkillsListBasedOnName(String name);
+//
+//
+//	public Page<Skills> getAllSkills(Pageable pageable) throws SkillsNotFoundException;
+//
+//	public Page<Skills> getSkillsListBasedOnName(String name, Pageable pageable);
 }
-}
+
