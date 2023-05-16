@@ -2,7 +2,7 @@ package com.resourceradar.service.impl;
 
 import java.util.List;
 
-import com.resourceradar.entity.Skills;
+import com.resourceradar.entity.Skill;
 import com.resourceradar.service.SkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,10 @@ public class SkillsServiceImpl implements SkillsService {
 	private SkillsRepository skillsRepository;
 
 	@Override
-	public List<Skills> getAllSkills() throws SkillsNotFoundException {
+	public List<Skill> getAllSkills() throws SkillsNotFoundException {
 
 		try {
-			List<Skills> skills = skillsRepository.findAll();
+			List<Skill> skills = skillsRepository.findAll();
 
 			return skills;
 		} catch (Exception e) {
@@ -29,9 +29,9 @@ public class SkillsServiceImpl implements SkillsService {
 	}
 
 	@Override
-	public List<Skills> getSkillsListBasedOnName(String name) {
+	public List<Skill> getSkillsListBasedOnName(String name) {
 
-		List<Skills> skills = skillsRepository.findByNameContainingIgnoreCase(name);
+		List<Skill> skills = skillsRepository.findByNameContainingIgnoreCase(name);
 		return skills;
 
 	}

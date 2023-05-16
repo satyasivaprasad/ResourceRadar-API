@@ -7,7 +7,7 @@ import com.resourceradar.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.resourceradar.entity.Departments;
+import com.resourceradar.entity.Department;
 import com.resourceradar.exception.DepartmentNotFoundException;
 
 @Service
@@ -17,10 +17,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private DepartmentRepository departmentRepository;
 
 	@Override
-	public List<Departments> getAllDepartments() throws DepartmentNotFoundException {
+	public List<Department> getAllDepartments() throws DepartmentNotFoundException {
 
 		try {
-			List<Departments> departments = departmentRepository.findAll();
+			List<Department> departments = departmentRepository.findAll();
 			return departments;
 		} catch (Exception e) {
 			throw new DepartmentNotFoundException(" Department Details not found");
@@ -28,9 +28,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	public List<Departments> getDepartmentListBasedOnName(String name) {
+	public List<Department> getDepartmentListBasedOnName(String name) {
 
-		List<Departments> departments = departmentRepository.findByNameContainingIgnoreCase(name);
+		List<Department> departments = departmentRepository.findByNameContainingIgnoreCase(name);
 		return departments;
 
 	}

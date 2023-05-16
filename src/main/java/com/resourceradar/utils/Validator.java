@@ -1,11 +1,11 @@
 package com.resourceradar.utils;
 
-import com.resourceradar.dto.EmployeeDTO;
+import com.resourceradar.dto.EmployeeDto;
 import com.resourceradar.exception.CustomValidationException;
 
 public class Validator {
 
-    public static void  isValidate(EmployeeDTO employeeDTO) throws CustomValidationException {
+    public static void  isValidate(EmployeeDto employeeDTO) throws CustomValidationException {
         if (employeeDTO.getOrgEmpId() == null || employeeDTO.getOrgEmpId().isEmpty() ) {
             throw new CustomValidationException("OrgEmpId cannot be null or empty");
         }
@@ -38,7 +38,7 @@ public class Validator {
         if (employeeDTO.getStatus() == null || employeeDTO.getStatus().isEmpty()) {
             throw new CustomValidationException("Status cannot be null or empty");
         }
-        if (employeeDTO.getDepartments() == null) {
+        if (employeeDTO.getDepartment() == null) {
             throw new CustomValidationException("Department cannot be null");
         }
         if (employeeDTO.getGender() == null || employeeDTO.getGender().isEmpty()) {

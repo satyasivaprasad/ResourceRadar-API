@@ -3,7 +3,7 @@ package com.resourceradar.controller;
 import java.util.List;
 
 import com.resourceradar.config.EndPointConfig;
-import com.resourceradar.entity.Skills;
+import com.resourceradar.entity.Skill;
 import com.resourceradar.service.impl.SkillsServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class SkillsController {
 	private SkillsServiceImpl skillsService;
 
 	@GetMapping(EndPointConfig.SKILLS)
-	public ResponseEntity<List<Skills>> getAllSkills() throws SkillsNotFoundException {
-		List<Skills> skills = skillsService.getAllSkills();
+	public ResponseEntity<List<Skill>> getAllSkills() throws SkillsNotFoundException {
+		List<Skill> skills = skillsService.getAllSkills();
 
 		if (skills.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -36,8 +36,8 @@ public class SkillsController {
 
 	}
 	 @GetMapping(EndPointConfig.SKILLS_DETAILS_SEARCH)
-	    public ResponseEntity<List<Skills>> searchSkillsBasedOnName(@RequestParam("query") String query)  throws SkillsNotFoundException {
-	        List<Skills> skills = skillsService.getSkillsListBasedOnName(query);
+	    public ResponseEntity<List<Skill>> searchSkillsBasedOnName(@RequestParam("query") String query)  throws SkillsNotFoundException {
+	        List<Skill> skills = skillsService.getSkillsListBasedOnName(query);
 
 	        if (skills.isEmpty()) {
 	            return new ResponseEntity<>(HttpStatus.NO_CONTENT);

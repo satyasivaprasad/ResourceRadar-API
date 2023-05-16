@@ -7,7 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "employee_audit_tbl")
+@Table(name = "employee_audit")
 @Data
 public class EmployeeAudit {
 

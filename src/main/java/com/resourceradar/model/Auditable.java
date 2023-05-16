@@ -1,17 +1,15 @@
-package com.resourceradar.entity;
-
-import java.time.LocalDateTime;
+package com.resourceradar.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 
+import java.time.LocalDateTime;
+
 @MappedSuperclass
-public class AuditableEntity {
-	
-	
-	@JsonProperty("createdBy")
+public abstract class Auditable {
+
+    @JsonProperty("createdBy")
     @Column(name = "created_by")
     private String createdBy;
 

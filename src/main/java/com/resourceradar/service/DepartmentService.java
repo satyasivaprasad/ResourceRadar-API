@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.resourceradar.entity.Departments;
+import com.resourceradar.entity.Department;
 import com.resourceradar.exception.DepartmentNotFoundException;
 
 @Service
 public interface DepartmentService {
 
-	public List<Departments> getAllDepartments() throws DepartmentNotFoundException;
+	public List<Department> getAllDepartments() throws DepartmentNotFoundException;
 
-	public List<Departments> getDepartmentListBasedOnName(String name);
+	public List<Department> getDepartmentListBasedOnName(String name);
 }

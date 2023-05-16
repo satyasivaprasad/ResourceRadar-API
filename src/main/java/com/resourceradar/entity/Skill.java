@@ -1,5 +1,6 @@
 package com.resourceradar.entity;
 
+import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,16 +18,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "skills")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Skills extends AuditableEntity {
+public class Skill extends Auditable {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -36,10 +35,9 @@ public class Skills extends AuditableEntity {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	// private String org_id;
-
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) 
 	@JoinColumn(name = "org_id")
 	@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
 	private Organization organization;
+
 }

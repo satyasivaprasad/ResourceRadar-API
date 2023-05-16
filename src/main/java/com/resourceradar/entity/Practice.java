@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Practice extends AuditableEntity {
+public class Practice extends Auditable {
 
 	@Id
 	@GeneratedValue(generator = "uuid")

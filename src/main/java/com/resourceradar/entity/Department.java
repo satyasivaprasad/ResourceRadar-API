@@ -1,5 +1,6 @@
 package com.resourceradar.entity;
 
+import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Departments extends AuditableEntity {
+public class Department extends Auditable {
 
 	@Id
 	@GeneratedValue(generator = "uuid")
@@ -41,5 +42,5 @@ public class Departments extends AuditableEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "parent_department_id")
-	private Departments parentDepartment;
+	private Department parentDepartment;
 }
