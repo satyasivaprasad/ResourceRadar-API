@@ -3,8 +3,12 @@ package com.resourceradar.dto;
 import java.time.LocalDateTime;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Setter
+@Getter
 public class PracticeDTO {
 
 	private String name;
@@ -14,5 +18,5 @@ public class PracticeDTO {
 	private LocalDateTime endDate;
 
 
-
 }
+

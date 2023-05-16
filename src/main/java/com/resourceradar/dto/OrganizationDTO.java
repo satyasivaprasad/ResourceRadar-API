@@ -24,7 +24,7 @@ public class OrganizationDTO {
 
 	List<PracticeDTO> practices;
 
-	List<SkillsDTO> skills;
+	List<SkillDTO> skills;
 
 		
 

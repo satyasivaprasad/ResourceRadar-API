@@ -5,6 +5,8 @@ import java.util.List;
 import com.resourceradar.entity.Skill;
 import com.resourceradar.service.SkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.resourceradar.exception.SkillsNotFoundException;
@@ -20,9 +22,9 @@ public class SkillsServiceImpl implements SkillsService {
 	public List<Skill> getAllSkills() throws SkillsNotFoundException {
 
 		try {
-			List<Skill> skills = skillsRepository.findAll();
+			List<Skill> skill = skillsRepository.findAll();
 
-			return skills;
+			return skill;
 		} catch (Exception e) {
 			throw new SkillsNotFoundException(" Skills Details not found");
 		}
@@ -31,18 +33,18 @@ public class SkillsServiceImpl implements SkillsService {
 	@Override
 	public List<Skill> getSkillsListBasedOnName(String name) {
 
-		List<Skill> skills = skillsRepository.findByNameContainingIgnoreCase(name);
-		return skills;
+		List<Skill> skill = skillsRepository.findByNameContainingIgnoreCase(name);
+		return skill;
 
 	}
 	@Override
-	public Page<Skills> getAllSkills(Pageable pageable) throws SkillsNotFoundException {
+	public Page<Skill> getAllSkills(Pageable pageable) throws SkillsNotFoundException {
 		return skillsRepository.findAll(pageable);
 	}
 
 
 	@Override
-	public Page<Skills> getSkillsListBasedOnName(String name, Pageable pageable) {
+	public Page<Skill> getSkillsListBasedOnName(String name, Pageable pageable) {
 		return skillsRepository.findByNameContainingIgnoreCase(name, pageable);
 	}
 

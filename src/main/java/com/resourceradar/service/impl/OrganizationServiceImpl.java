@@ -16,7 +16,7 @@ import com.resourceradar.dto.DepartmentDTO;
 import com.resourceradar.dto.DesignationDTO;
 import com.resourceradar.dto.OrganizationDTO;
 import com.resourceradar.dto.PracticeDTO;
-import com.resourceradar.dto.SkillsDTO;
+import com.resourceradar.dto.SkillDTO;
 import com.resourceradar.entity.Department;
 import com.resourceradar.repository.DepartmentRepository;
 import com.resourceradar.repository.OrganizationRepository;
@@ -115,10 +115,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 */		org.setPractices(practiceDTOs);
 
 		List<Skill> skills = skillsRepository.findAll();
-		List<SkillsDTO> skillsDTOs = new ArrayList<>();
+		List<SkillDTO> skillsDTOs = new ArrayList<>();
 		if (!skills.isEmpty()) {
 			for (Skill skill : skills) {
-				SkillsDTO skillsDTO = new SkillsDTO();
+				SkillDTO skillsDTO = new SkillDTO();
 				skillsDTO.setId(skill.getId());
 				skillsDTO.setName(skill.getName());
 				skillsDTOs.add(skillsDTO);
