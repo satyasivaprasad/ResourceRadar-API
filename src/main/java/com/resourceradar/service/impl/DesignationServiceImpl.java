@@ -35,6 +35,15 @@ public class DesignationServiceImpl implements DesignationService {
 		
 		
 	}
+	@Override
+	public Page<Designation> getAllDesignation(Pageable pageable) throws DesignationNotFoundException {
+		try {
+			return designationRepository.findAll(pageable);
+		} catch (Exception e) {
+			throw new DesignationNotFoundException("Designation details not found");
+		}
+	}
+	}
 
 
 }

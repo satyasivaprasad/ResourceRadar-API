@@ -45,6 +45,33 @@ public class SkillsController {
 	            return new ResponseEntity<>(skills, HttpStatus.OK);
 	        }
 	    }
+	public ResponseEntity<Page<Skills>> getAllSkills(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size
+	) throws SkillsNotFoundException {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Skills> skills = skillsService.getAllSkills(pageable);
+
+		if (skills.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(skills, HttpStatus.OK);
+		}
+	}
+	public ResponseEntity<Page<Skills>> searchSkillsBasedOnName(
+			@RequestParam("query") String query,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size
+	) throws SkillsNotFoundException {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Skills> skills = skillsService.getSkillsListBasedOnName(query, pageable);
+
+		if (skills.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<>(skills, HttpStatus.OK);
+		}
+	}
 
 }
 

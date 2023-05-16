@@ -46,6 +46,17 @@ public class DepartmentController {
         }
 
     }
+	@GetMapping
+	public ResponseEntity<Page<Departments>> getDepartmentsByName(
+			@RequestParam(defaultValue = "") String name,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size
+	) {
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Departments> departments = departmentService.getDepartmentsByName(name, pageable);
+		return ResponseEntity.ok(departments);
+	}
+
 
 
 }
