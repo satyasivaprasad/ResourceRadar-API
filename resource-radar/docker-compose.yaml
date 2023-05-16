@@ -1,0 +1,20 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres
+    image: "resource-radar-db-image"
+    container_name: ${PG_CONTAINER_NAME}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: ${PGDATA}
+    volumes:
+      - resource-radar-db:/data/postgres-resource-radar
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+volumes:
+  resource-radar-db:
+    external: true
