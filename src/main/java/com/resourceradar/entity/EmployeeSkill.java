@@ -6,46 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Entity
-@Table(name = "employees_skills")
-public class EmployeeSkill implements Serializable {
-    @Column(name = "is_primary")
-    private boolean isPrimary;
-
-    private EmployeeSkillId pk = new EmployeeSkillId();
-
+@Table(name = "employee_skill")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeSkill {
     @EmbeddedId
-    private EmployeeSkillId getPk() {
-        return pk;
-    }
+    private EmployeeSkillKey id = new EmployeeSkillKey();
 
-    private void setPk(EmployeeSkillId pk) {
-        this.pk = pk;
-    }
-
-    @Id
     @ManyToOne
+    @MapsId("employeeId")
     @JoinColumn(name = "employee_id")
-    @Transient
-    public Employee getEmployee() {
-        return getPk().getEmployee();
-    }
+    private Employee employee;
 
-    public void setEmployee(Employee employee) {
-        getPk().setEmployee(employee);
-    }
-
-    @Id
     @ManyToOne
+    @MapsId("skillId")
     @JoinColumn(name = "skill_id")
-    @Transient
-    public Skill getSkill() {
-        return getPk().getSkill();
-    }
+    private Skill skill;
 
-    public void setSkill(Skill skill) {
-        getPk().setSkill(skill);
-    }
+    @Column(name = "isPrimary")
+    private Boolean isPrimary;
+
 }

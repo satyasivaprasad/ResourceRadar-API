@@ -8,6 +8,7 @@ import com.resourceradar.dto.EmployeeDto;
 import com.resourceradar.config.EndPointConfig;
 import com.resourceradar.entity.Employee;
 import com.resourceradar.exception.CustomValidationException;
+import com.resourceradar.mapper.EmployeeMapper;
 import com.resourceradar.repository.EmployeeAuditRepository;
 import com.resourceradar.repository.EmployeeRepository;
 import com.resourceradar.service.impl.EmployeeServiceImpl;
@@ -40,6 +41,7 @@ public class EmployeeController {
         try {
             Validator.isValidate(employeeDTO);
             Employee employee = employeeRepository.findByOrgEmpId(employeeDTO.getOrgEmpId());
+            Employee employeeMap = EmployeeMapper.INSTANCE.mapEmployee(employeeDTO);
             if (employee == null) {
                 Employee emp = employeeService.createEmployee(employeeDTO, request);
                 ObjectMapper mapper = new ObjectMapper();

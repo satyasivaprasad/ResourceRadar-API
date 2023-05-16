@@ -4,6 +4,7 @@ import com.resourceradar.dto.EmployeeDto;
 import com.resourceradar.dto.EmployeeSkillsDto;
 import com.resourceradar.entity.Employee;
 import com.resourceradar.entity.EmployeeSkill;
+import com.resourceradar.entity.EmployeeSkillKey;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -15,5 +16,6 @@ public interface EmployeeMapper {
 
     Employee mapEmployee(EmployeeDto employeeDto);
 
-    EmployeeSkill mapEmployeeSkills(EmployeeSkillsDto employeeDto);
+    EmployeeSkillKey map(String value);
+
 }

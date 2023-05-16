@@ -39,4 +39,5 @@ public class Skill extends Auditable {
 	@JoinColumn(name = "org_id")
 	@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
 	private Organization organization;
+
 }

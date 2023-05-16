@@ -1,7 +1,6 @@
 package com.resourceradar.dto;
 
 import com.resourceradar.entity.Department;
-import com.resourceradar.entity.Skill;
 import lombok.Data;
 
 import java.time.LocalDateTime;

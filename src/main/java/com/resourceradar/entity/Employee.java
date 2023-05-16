@@ -10,8 +10,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -99,15 +101,6 @@ public class Employee implements Serializable {
     @Column(name = "modifiedTime")
     private LocalDateTime modifiedTime;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy ="employee", cascade = CascadeType.ALL)
-    public List<EmployeeSkill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<EmployeeSkill> employeeSkills) {
-        this.skills = employeeSkills;
-    }
-
-    @ElementCollection
-    private List<EmployeeSkill> skills = new LinkedList<EmployeeSkill>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<EmployeeSkill> skills = new HashSet<>();
 }

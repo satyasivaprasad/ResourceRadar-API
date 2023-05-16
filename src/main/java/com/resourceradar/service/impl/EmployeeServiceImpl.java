@@ -1,23 +1,31 @@
 package com.resourceradar.service.impl;
 
 import com.resourceradar.dto.EmployeeDto;
+import com.resourceradar.dto.EmployeeSkillsDto;
 import com.resourceradar.entity.Employee;
+import com.resourceradar.entity.EmployeeSkill;
+import com.resourceradar.entity.Skill;
 import com.resourceradar.mapper.EmployeeMapper;
 import com.resourceradar.repository.EmployeeRepository;
+import com.resourceradar.repository.SkillsRepository;
 import com.resourceradar.service.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final SkillsRepository skillsRepository;
 
-    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository, @Autowired SkillsRepository skillsRepository) {
         this.employeeRepository = employeeRepository;
+        this.skillsRepository = skillsRepository;
     }
 
     @Override
@@ -28,37 +36,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = EmployeeMapper.INSTANCE.mapEmployee(employeeDTO);
         employee.setOrgId(orgId);
 
-//        Employee employee = new Employee();
-//
-//        employee.setNotes(employeeDTO.getNotes());
-//        employee.setNickname(employeeDTO.getNickname());
-//        employee.setStatus(employeeDTO.getStatus());
-//        employee.setLocation(employeeDTO.getLocation());
-//        employee.setOrgEmpId(employeeDTO.getOrgEmpId());
-//        employee.setOrgId(orgId);
-//        employee.setLastName(employeeDTO.getLastName());
-//        employee.setFirstName(employeeDTO.getFirstName());
-//        employee.setGender(employeeDTO.getGender());
-//        employee.setContactNumber(employeeDTO.getContactNumber());
-//        employee.setActive(employeeDTO.isActive());
-//        employee.setBillable(employeeDTO.isBillable());
-//        employee.setEmail(employeeDTO.getEmail());
-//        employee.setDepartment(employeeDTO.getDepartments());
-//        employee.setType(employeeDTO.getType());
-//        employee.setDesignation(employeeDTO.getDesignation());
-//        employee.setPractice(employeeDTO.getPractice());
-//        employee.setCreatedBy(employeeDTO.getCreatedBy());
-//        employee.setCreatedTime(employeeDTO.getCreatedTime());
-//        employee.setModifiedBy(employeeDTO.getModifiedBy());
-//        employee.setModifiedBy(employeeDTO.getModifiedBy());
-//        employee.setFissionStartDate(employeeDTO.getFissionStartDate());
-
+        if (!employeeDTO.getSkills().isEmpty()) {
+            Set<EmployeeSkill> employeeSkillsList = new HashSet<>();
+            for (EmployeeSkillsDto employeeSkillDto :
+                    employeeDTO.getSkills()) {
+                Optional<Skill> s = skillsRepository.findById(employeeSkillDto.getId());
+                EmployeeSkill employeeSkill = new EmployeeSkill();
+                employeeSkill.setSkill(s.get());
+                employeeSkill.setEmployee(employee);
+                employeeSkill.setIsPrimary(employeeSkillDto.getIsPrimary());
+                employeeSkillsList.add(employeeSkill);
+            }
+            employee.setSkills(employeeSkillsList);
+        }
 
         Employee savedEmployee = employeeRepository.save(employee);
 
         log.info("employee save successfully =====>  " + savedEmployee.getId());
         return savedEmployee;
-
-
     }
 }
