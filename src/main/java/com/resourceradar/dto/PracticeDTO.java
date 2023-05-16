@@ -12,6 +12,7 @@ public class PracticeDTO {
 	private String orgId;
 	private LocalDateTime startDate;
 	private LocalDateTime endDate;
+	
 
 
 
