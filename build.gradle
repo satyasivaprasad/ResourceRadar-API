@@ -72,6 +72,7 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.5'
 
+
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
@@ -128,3 +129,8 @@ dependencyManagement {
 		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
 	}
 }
+	dependencies {
+		// Other dependencies
+		implementation 'org.springframework.data:spring-data-commons'
+	}
+

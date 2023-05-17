@@ -7,6 +7,9 @@ import com.resourceradar.entity.Skill;
 import com.resourceradar.service.impl.SkillsServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,12 +48,12 @@ public class SkillsController {
 	            return new ResponseEntity<>(skills, HttpStatus.OK);
 	        }
 	    }
-	public ResponseEntity<Page<Skills>> getAllSkills(
+	public ResponseEntity<Page<Skill>> getAllSkills(
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size
 	) throws SkillsNotFoundException {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<Skills> skills = skillsService.getAllSkills(pageable);
+		Page<Skill> skills = skillsService.getAllSkills(pageable);
 
 		if (skills.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -58,13 +61,13 @@ public class SkillsController {
 			return new ResponseEntity<>(skills, HttpStatus.OK);
 		}
 	}
-	public ResponseEntity<Page<Skills>> searchSkillsBasedOnName(
+	public ResponseEntity<Page<Skill>> searchSkillsBasedOnName(
 			@RequestParam("query") String query,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size
 	) throws SkillsNotFoundException {
 		Pageable pageable = PageRequest.of(page, size);
-		Page<Skills> skills = skillsService.getSkillsListBasedOnName(query, pageable);
+		Page<Skill> skills = skillsService.getSkillsListBasedOnName(query, pageable);
 
 		if (skills.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

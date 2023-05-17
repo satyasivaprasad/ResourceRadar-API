@@ -6,6 +6,8 @@ import com.resourceradar.entity.Designation;
 import com.resourceradar.repository.DesignationRepository;
 import com.resourceradar.service.DesignationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.resourceradar.exception.DesignationNotFoundException;
@@ -17,7 +19,7 @@ public class DesignationServiceImpl implements DesignationService {
 	private DesignationRepository designationRepository;
 
 	@Override
-	public List<Designation> getAllDesignation() throws DesignationNotFoundException{
+	public List<Designation> getAllDesignation() throws DesignationNotFoundException {
 		try {
 			List<Designation> designations = designationRepository.findAll();
 			return designations;
@@ -32,9 +34,9 @@ public class DesignationServiceImpl implements DesignationService {
 		List<Designation> designations = designationRepository.findByNameContainingIgnoreCase(name);
 		return designations;
 
-		
-		
+
 	}
+
 	@Override
 	public Page<Designation> getAllDesignation(Pageable pageable) throws DesignationNotFoundException {
 		try {
@@ -43,7 +45,4 @@ public class DesignationServiceImpl implements DesignationService {
 			throw new DesignationNotFoundException("Designation details not found");
 		}
 	}
-	}
-
-
 }

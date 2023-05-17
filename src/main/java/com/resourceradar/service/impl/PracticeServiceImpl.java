@@ -3,12 +3,16 @@ package com.resourceradar.service.impl;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.resourceradar.dto.PracticeDTO;
 import com.resourceradar.entity.Practice;
 import com.resourceradar.exception.PracticeNotFoundException;
 import com.resourceradar.service.PracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.resourceradar.repository.PracticeRepository;
@@ -24,20 +28,24 @@ public class PracticeServiceImpl implements PracticeService {
 
 		try {
 			List<Practice> practices = practiceRepository.findAll();
-			if(practices==null) {
-				System.out.println("=========================================="+practices);
+			if (practices == null) {
+				System.out.println("==========================================" + practices);
 			}
-			System.out.println("=========================================="+practices);
-//			return practices.stream().map(this::convertToDto).collect(Collectors.toList());
-			List<PracticeDTO> practiceDTOs= new ArrayList<>();
-			PracticeDTO pDto= new PracticeDTO();
-			for(Practice p: practices) {
-			//	pDto=convertToDto(p);
+			System.out.println("==========================================" + practices);
+//            return practices.stream().map(this::convertToDto).collect(Collectors.toList());
+			List<PracticeDTO> practiceDTOs = new ArrayList<>();
+			for (Practice p : practices) {
+				PracticeDTO pDto = new PracticeDTO();
+				pDto.setOrgId(p.getId());
+				pDto.setName(p.getName());
+				pDto.setOrgId(p.getOrgId());
+				pDto.setStartDate(p.getCreatedDate());
+				pDto.setEndDate(p.getModifiedDate());
 				practiceDTOs.add(pDto);
 			}
 			return practiceDTOs;
 		} catch (Exception e) {
-			throw new PracticeNotFoundException("Practice Details not found"+e);
+			throw new PracticeNotFoundException("Practice Details not found" + e);
 		}
 	}
 
@@ -49,6 +57,43 @@ public class PracticeServiceImpl implements PracticeService {
 		return null;
 
 	}
+
+	@Override
+	public Page<PracticeDTO> getAllPractices(Pageable pageable) throws PracticeNotFoundException {
+		Page<Practice> practicePage = practiceRepository.findAll(pageable);
+		List<PracticeDTO> practiceDTOs = practicePage.getContent().stream()
+				.map(this::convertToDto)
+				.collect(Collectors.toList());
+
+		return new PageImpl<>(practiceDTOs, pageable, practicePage.getTotalElements());
+	}
+
+	@Override
+	public Page<PracticeDTO> getPracticeListBasedOnName(String name, Pageable pageable) {
+		Page<Practice> practicePage = practiceRepository.findByNameContainingIgnoreCase(name, pageable);
+		List<PracticeDTO> practiceDTOs = practicePage.getContent().stream()
+				.map(this::convertToDto)
+				.collect(Collectors.toList());
+
+		return new PageImpl<>(practiceDTOs, pageable, practicePage.getTotalElements());
+	}
+
+	@Override
+	public PracticeDTO convertToDto(Practice practice) {
+		PracticeDTO practiceDto = new PracticeDTO();
+		practiceDto.setOrgId(practice.getId());
+		practiceDto.setName(practice.getName());
+		return practiceDto;
+	}
+
+//	@Override
+//	public PracticeDTO convertToDTo(Practice practice) {
+//		PracticeDTO practiceDto = new PracticeDTO();
+//		practiceDto.setId(practice.getId());
+//		practiceDto.setName(practice.getName());
+//		// Set other properties as needed
+//		return practiceDto;
+//	}
 
 	/*private PracticeDTO convertToDto(Practice practice) {
 		PracticeDTO practiceDto = new PracticeDTO();
