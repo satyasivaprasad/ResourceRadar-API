@@ -1,5 +1,6 @@
 package com.resourceradar.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class EmployeeSkill {
     @EmbeddedId
     private EmployeeSkillKey id = new EmployeeSkillKey();
@@ -17,14 +17,18 @@ public class EmployeeSkill {
     @ManyToOne
     @MapsId("employeeId")
     @JoinColumn(name = "employee_id")
+    @JsonBackReference
     private Employee employee;
 
     @ManyToOne
     @MapsId("skillId")
     @JoinColumn(name = "skill_id")
+    @JsonBackReference
     private Skill skill;
 
     @Column(name = "isPrimary")
     private Boolean isPrimary;
 
+    @Column(name = "name")
+    private String name;
 }

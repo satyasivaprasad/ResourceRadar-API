@@ -77,12 +77,12 @@ public class EmployeeController {
     }
 
     @GetMapping(EndPointConfig.ID)
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable String id) {
-        Employee employee = employeeService.getEmployeeById(id);
-        if (employee != null) {
+    public ResponseEntity<Employee> getEmployeeByOrgId(@PathVariable String orgId) {
+        Employee employee = employeeService.getEmployeeById(orgId);
+        if (employee == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @GetMapping(EndPointConfig.EMPLOYEE_SEARCH)

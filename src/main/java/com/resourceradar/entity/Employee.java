@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -109,6 +110,7 @@ public class Employee implements Serializable {
     @Column(name = "modifiedTime")
     private LocalDateTime modifiedTime;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<EmployeeSkill> skills = new HashSet<>();
 }
