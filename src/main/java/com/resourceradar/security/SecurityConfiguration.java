@@ -33,7 +33,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth.requestMatchers(new AntPathRequestMatcher("/social"),new AntPathRequestMatcher("/health")).permitAll().anyRequest().authenticated()).exceptionHandling();
+        http.authorizeHttpRequests(auth -> auth.requestMatchers(new AntPathRequestMatcher("/social")).permitAll().anyRequest().authenticated()).exceptionHandling();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(new GoogleAuthProvider()).exceptionHandling()
                 .authenticationEntryPoint(myAuthenticationEntryPoint());

@@ -15,6 +15,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
     List<Employee> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstNameQuery, String lastNameQuery);
 
-    @Query(value = "select * from employees_tbl where email=?1",nativeQuery = true)
+    @Query(value = "select * from employees where email=?1",nativeQuery = true)
     Employee findByEmail(String email);
 }

@@ -15,8 +15,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-
 public class SecurityAuthValidationFilter extends GenericFilterBean {
 
     TokenService tokenService;
@@ -44,7 +42,7 @@ public class SecurityAuthValidationFilter extends GenericFilterBean {
             if (claim != null) {
                 GoogleAuthToken token = new GoogleAuthToken(claim.get("id"), null, null,
 
-                        Collections.singleton(new SimpleGrantedAuthority((String) claim.get("role"))));
+                        null);
                 SecurityContextHolder.getContext().setAuthentication(token);
                 chain.doFilter(request, response);
 
@@ -66,4 +64,3 @@ public class SecurityAuthValidationFilter extends GenericFilterBean {
     }
 
 }
-
