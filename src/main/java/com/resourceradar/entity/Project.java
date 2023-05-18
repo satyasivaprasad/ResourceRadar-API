@@ -3,6 +3,9 @@ package com.resourceradar.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,8 +35,8 @@ public class Project {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
+    @JsonIgnore
     private Client client;
 
 
-    // Constructor, getters and setters
 }

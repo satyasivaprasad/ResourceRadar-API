@@ -155,4 +155,10 @@ public class ClientServiceImpl implements ClientService {
 		return  "updated";
 	}
 
+	@Override
+	public List<Client> getAllClients() {
+		List<Client> findAll = clientRepository.findAll();
+		return findAll;
+	}
+
 }
