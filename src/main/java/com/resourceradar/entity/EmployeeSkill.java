@@ -1,10 +1,8 @@
 package com.resourceradar.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "employee_skill")
@@ -19,14 +17,18 @@ public class EmployeeSkill {
     @ManyToOne
     @MapsId("employeeId")
     @JoinColumn(name = "employee_id")
+    @JsonBackReference
     private Employee employee;
 
     @ManyToOne
     @MapsId("skillId")
     @JoinColumn(name = "skill_id")
+    @JsonBackReference
     private Skill skill;
 
     @Column(name = "isPrimary")
     private Boolean isPrimary;
 
+    @Column(name = "name")
+    private String name;
 }

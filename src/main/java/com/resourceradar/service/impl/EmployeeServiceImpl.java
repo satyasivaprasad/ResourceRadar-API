@@ -48,6 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employeeSkill.setSkill(s.get());
                 employeeSkill.setEmployee(employee);
                 employeeSkill.setIsPrimary(employeeSkillDto.getIsPrimary());
+                employeeSkill.setName(employeeSkillDto.getName());
                 employeeSkillsList.add(employeeSkill);
             }
             employee.setSkills(employeeSkillsList);
@@ -65,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(String id) {
-        return employeeRepository.findById(id).orElse(null);
+        return employeeRepository.findByOrgEmpId(id);
     }
 
     @Override

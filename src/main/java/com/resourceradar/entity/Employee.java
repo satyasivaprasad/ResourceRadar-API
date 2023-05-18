@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.CascadeType;
@@ -20,10 +22,6 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "employees")
@@ -34,6 +32,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Employee implements Serializable {
 
     @Id
@@ -112,5 +111,6 @@ public class Employee implements Serializable {
     private LocalDateTime modifiedTime;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<EmployeeSkill> skills = new HashSet<>();
 }
