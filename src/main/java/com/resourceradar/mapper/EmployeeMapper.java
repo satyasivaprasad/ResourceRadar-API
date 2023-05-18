@@ -16,4 +16,6 @@ public interface EmployeeMapper {
 
     Employee mapEmployee(EmployeeDto employeeDto);
 
+    EmployeeSkillKey map(String value);
+
 }
