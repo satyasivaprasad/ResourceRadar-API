@@ -9,8 +9,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProjectService {
 
-//	public List<Project> getAllProjects() throws ProjectNotFoundException;
-
 	List<Project> findAllProjectsBYClientId(String clientId);
 
 	public List<Project> getAllProjects() throws ProjectNotFoundException;
@@ -18,6 +16,7 @@ public interface ProjectService {
 	public List<Project> getProjectBasedOnClineId(String clientId);
 
 	List<Project> getProjectBasedOnClientId(String clientId);
+
 	Page<Project> getAllProjects(Pageable pageable) throws ProjectNotFoundException;
 
 }

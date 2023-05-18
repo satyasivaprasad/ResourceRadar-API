@@ -12,9 +12,7 @@ import lombok.ToString;
 public class ApplicationRoleDTO {
 	
 	private String id;
-
 	private String name;
-
 	private String displayName;
 
 

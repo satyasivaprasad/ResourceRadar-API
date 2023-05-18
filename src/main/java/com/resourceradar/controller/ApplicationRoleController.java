@@ -59,30 +59,10 @@ public class ApplicationRoleController {
 
         if (roles.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
+        }
+        else {
             return new ResponseEntity<>(roles, HttpStatus.OK);
         }
     }
 
-
-//    public ResponseEntity<Page<ApplicationRole>> searchApplicationRolesBasedOnName(
-//            @RequestParam("query") String query,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size
-//    ) throws ApplicationRoleNotFoundException {
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<ApplicationRole> roles = applicationRoleService.getApplicationRolesListBasedOnName(query, pageable);
-//
-//        if (roles.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(roles, HttpStatus.OK);
-//        }
-//    }
 }
-
-
-
-
-
-

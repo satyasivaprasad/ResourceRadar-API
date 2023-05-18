@@ -41,7 +41,6 @@ public class ProjectController {
 	@GetMapping(EndPointConfig.PROJECT_DETAILS_SEARCH)
 	public ResponseEntity<List<Project>> searchProjectsByClient(@RequestParam("clientId") String clientId)
 			throws ProjectNotFoundException {
-
 		List<Project> projects = projectService.getProjectBasedOnClientId(clientId);
 		if (projects.isEmpty()){
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

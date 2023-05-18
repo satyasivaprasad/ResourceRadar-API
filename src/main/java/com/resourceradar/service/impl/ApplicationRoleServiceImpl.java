@@ -17,7 +17,6 @@ public class ApplicationRoleServiceImpl implements ApplicationRoleService {
 
     @Autowired
     private ApplicationRoleRepository applicationRoleRepository;
-
     @Override
     public List<ApplicationRole> getAllApplicationRoles() throws ApplicationRoleNotFoundException {
         try {
@@ -26,7 +25,6 @@ public class ApplicationRoleServiceImpl implements ApplicationRoleService {
             throw new ApplicationRoleNotFoundException("Application roles not found");
         }
     }
-
     @Override
     public List<ApplicationRole> getApplicationRolesListBasedOnName(String name) throws ApplicationRoleNotFoundException {
         try {
@@ -36,7 +34,6 @@ public class ApplicationRoleServiceImpl implements ApplicationRoleService {
             throw new ApplicationRoleNotFoundException("Application roles not found");
         }
     }
-
     @Override
     public Page<ApplicationRole> getAllApplicationRoles(Pageable pageable) throws ApplicationRoleNotFoundException {
         try {
@@ -52,13 +49,4 @@ public class ApplicationRoleServiceImpl implements ApplicationRoleService {
         return optionalRole.orElseThrow(() -> new ApplicationRoleNotFoundException("Application role not found with ID: " + roleId));
     }
 
-//    @Override
-//    public ApplicationRole getRoleByEmployeeId(Long roleId) throws ApplicationRoleNotFoundException {
-//        ApplicationRole role = applicationRoleRepository.findById(roleId);
-//        if (role != null) {
-//            return role;
-//        } else {
-//            throw new ApplicationRoleNotFoundException("Application role not found for employee with ID: " + roleId);
-//        }
-//    }
 }

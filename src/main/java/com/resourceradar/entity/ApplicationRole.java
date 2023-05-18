@@ -27,6 +27,8 @@ public class ApplicationRole extends Auditable {
     @Column(name = "display_name", nullable = false)
     private String displayName;
 
+
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private ApplicationRole role;

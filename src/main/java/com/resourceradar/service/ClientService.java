@@ -16,7 +16,6 @@ public interface ClientService {
 
        public String updateClientById(String id, String status);
 
-
        public List<Client> getAllClients();
 
 }

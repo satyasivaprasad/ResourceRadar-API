@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 public interface ApplicationRoleRepository extends JpaRepository<ApplicationRole, String>{
 
+
+
    List<ApplicationRole> findByNameContainingIgnoreCase(String name);
 
 }

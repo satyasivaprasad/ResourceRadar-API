@@ -154,7 +154,6 @@ public class ClientServiceImpl implements ClientService {
 		int count = clientRepository.updateClientStatusById(id, status);
 		return  "updated";
 	}
-
 	@Override
 	public List<Client> getAllClients() {
 		List<Client> findAll = clientRepository.findAll();

@@ -29,7 +29,6 @@ public class ProjectServiceImpl implements ProjectService {
 		List<Project> projects = client.get().getProjects();
 		return projects;
 	}
-
 	@Override
 	public List<Project> getAllProjects() throws ProjectNotFoundException {
 		try {
@@ -40,14 +39,12 @@ public class ProjectServiceImpl implements ProjectService {
 			throw new ProjectNotFoundException(" Project Details not found");
 		}
 	}
-
 	@Override
 	public List<Project> getProjectBasedOnClineId(String clientId) {
 		Optional<Client> client = clientRepository.findById(clientId);
 		List<Project> projects = client.get().getProjects();
 		return projects;
 	}
-
 	@Override
 	public List<Project> getProjectBasedOnClientId(String clientId) {
 		Optional<Client> client = clientRepository.findById(clientId);

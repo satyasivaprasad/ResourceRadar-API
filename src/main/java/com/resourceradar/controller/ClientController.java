@@ -58,6 +58,7 @@ public class ClientController {
     }
     @GetMapping()
     public List<Client> getAllClients(){
+
     	List<Client> allClients = clientService.getAllClients();
     	return allClients;
     }
