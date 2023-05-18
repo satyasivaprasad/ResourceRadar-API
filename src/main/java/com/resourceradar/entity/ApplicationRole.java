@@ -23,10 +23,9 @@ public class ApplicationRole extends Auditable {
 
     @Column(name = "name", nullable = false)
     private String name;
-    
+
     @Column(name = "display_name", nullable = false)
     private String displayName;
-
 
 
     @ManyToOne

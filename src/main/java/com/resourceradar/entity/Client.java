@@ -42,7 +42,7 @@ public class Client {
 	@Column(name = "end_date")
 	private LocalDateTime endDate;
 
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Project> projects = new ArrayList<>();
 
 

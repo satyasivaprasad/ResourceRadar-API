@@ -1,5 +1,13 @@
 package com.resourceradar.service.impl;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.resourceradar.dto.EmployeeDto;
 import com.resourceradar.dto.EmployeeSkillsDto;
 import com.resourceradar.entity.Employee;
@@ -9,24 +17,19 @@ import com.resourceradar.mapper.EmployeeMapper;
 import com.resourceradar.repository.EmployeeRepository;
 import com.resourceradar.repository.SkillsRepository;
 import com.resourceradar.service.EmployeeService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 @Service
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
-
-    private final EmployeeRepository employeeRepository;
-    private final SkillsRepository skillsRepository;
-
-    public EmployeeServiceImpl(@Autowired EmployeeRepository employeeRepository, @Autowired SkillsRepository skillsRepository) {
-        this.employeeRepository = employeeRepository;
-        this.skillsRepository = skillsRepository;
-    }
+	
+	@Autowired
+    private EmployeeRepository employeeRepository;
+	
+	@Autowired
+    private SkillsRepository skillsRepository;
 
     @Override
     public Employee createEmployee(EmployeeDto employeeDTO, HttpServletRequest request) {
@@ -45,6 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employeeSkill.setSkill(s.get());
                 employeeSkill.setEmployee(employee);
                 employeeSkill.setIsPrimary(employeeSkillDto.getIsPrimary());
+                employeeSkill.setName(employeeSkillDto.getName());
                 employeeSkillsList.add(employeeSkill);
             }
             employee.setSkills(employeeSkillsList);
@@ -55,4 +59,28 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.info("employee save successfully =====>  " + savedEmployee.getId());
         return savedEmployee;
     }
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    @Override
+    public Employee getEmployeeById(String id) {
+        return employeeRepository.findByOrgEmpId(id);
+    }
+
+    @Override
+    public List<Employee> searchEmployee(String query) {
+      List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(query, query);
+      return Employees;
+    }
+    
+	public void findemployee(String id) {
+		Optional<Employee> employee = employeeRepository.findById(id);
+		 employee.get().setActive(false);
+
+		
+	}
 }
+    
+

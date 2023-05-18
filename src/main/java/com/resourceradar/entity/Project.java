@@ -33,7 +33,7 @@ public class Project {
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     @JsonIgnore
     private Client client;

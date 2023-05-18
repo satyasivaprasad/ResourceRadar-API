@@ -307,12 +307,12 @@ CREATE TABLE application_role (
  name VARCHAR(255)
 );
 
-INSERT INTO application_role (id, name) VALUES (uuid_generate_v4(), 'ROLE_TeamMember');
-INSERT INTO application_role (id, name) VALUES (uuid_generate_v4(), 'ROLE_TeamIncharge');
-INSERT INTO application_role (id, name) VALUES (uuid_generate_v4(), 'ROLE_Manager');
-INSERT INTO application_role (id, name) VALUES (uuid_generate_v4(), 'ROLE_ResourceManager');
-INSERT INTO application_role (id, name) VALUES (uuid_generate_v4(), 'ROLE_HR');
-INSERT INTO application_role (id, name) VALUES (uuid_generate_v4(), 'ROLE_Admin');
+INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_TeamMember', 'Team Member');
+INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_TeamIncharge', 'Team Incharge');
+INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_Manager', 'Manager');
+INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_ResourceManager', 'Resource Manager');
+INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_HR', 'HR');
+INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_Admin', 'Admin');
 
 
 
