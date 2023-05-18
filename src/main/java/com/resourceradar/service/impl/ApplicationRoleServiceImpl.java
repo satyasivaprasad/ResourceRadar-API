@@ -20,7 +20,7 @@ public class ApplicationRoleServiceImpl implements ApplicationRoleService {
     @Override
     public List<ApplicationRole> getAllApplicationRoles() throws ApplicationRoleNotFoundException {
         try {
-            return getAllApplicationRoles();
+            return applicationRoleRepository.findAll();
         } catch (Exception e) {
             throw new ApplicationRoleNotFoundException("Application roles not found");
         }

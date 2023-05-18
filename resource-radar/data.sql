@@ -304,15 +304,16 @@ VALUES (uuid_generate_v4(), 'HR&TA', 'HR@FISSIONLABS.COM', 'FL1010 - Nishita - A
 
 CREATE TABLE application_role (
   id VARCHAR(255) PRIMARY KEY,
- name VARCHAR(255)
+ name VARCHAR(255),
+  display_name VARCHAR(255)
 );
 
-INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_TeamMember', 'Team Member');
-INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_TeamIncharge', 'Team Incharge');
-INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_Manager', 'Manager');
-INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_ResourceManager', 'Resource Manager');
-INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_HR', 'HR');
-INSERT INTO application_role (id, name, displayName) VALUES (uuid_generate_v4(), 'ROLE_Admin', 'Admin');
+INSERT INTO application_role (id, name, display_name) VALUES (uuid_generate_v4(), 'ROLE_TeamMember', 'Team Member');
+INSERT INTO application_role (id, name, display_name) VALUES (uuid_generate_v4(), 'ROLE_TeamIncharge', 'Team Incharge');
+INSERT INTO application_role (id, name, display_name) VALUES (uuid_generate_v4(), 'ROLE_Manager', 'Manager');
+INSERT INTO application_role (id, name, display_name) VALUES (uuid_generate_v4(), 'ROLE_ResourceManager', 'Resource Manager');
+INSERT INTO application_role (id, name, display_name) VALUES (uuid_generate_v4(), 'ROLE_HR', 'HR');
+INSERT INTO application_role (id, name, display_name) VALUES (uuid_generate_v4(), 'ROLE_Admin', 'Admin');
 
 
 
