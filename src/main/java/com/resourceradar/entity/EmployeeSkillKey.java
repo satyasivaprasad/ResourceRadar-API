@@ -19,4 +19,7 @@ public class EmployeeSkillKey implements Serializable {
 
     @Column(name = "skill_id")
     private String skillId;
+
+    @Column(name = "org_id")
+    private String orgID;
 }
