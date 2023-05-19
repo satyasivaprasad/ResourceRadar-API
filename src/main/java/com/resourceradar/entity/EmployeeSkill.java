@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "employee_skill")
+@Table(name = "employee_skill_mapping")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,6 +25,12 @@ public class EmployeeSkill {
     @JoinColumn(name = "skill_id")
     @JsonBackReference
     private Skill skill;
+
+    @ManyToOne
+    @MapsId("orgID")
+    @JoinColumn(name = "org_id")
+    @JsonBackReference
+    private Organization organization;
 
     @Column(name = "isPrimary")
     private Boolean isPrimary;

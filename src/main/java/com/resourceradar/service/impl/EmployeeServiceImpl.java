@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.resourceradar.entity.Organization;
+import com.resourceradar.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
     private SkillsRepository skillsRepository;
 
+    @Autowired
+    private OrganizationRepository organizationRepository;
+
     @Override
     public Employee createEmployee(EmployeeDto employeeDTO, HttpServletRequest request) {
 
@@ -38,6 +43,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = EmployeeMapper.INSTANCE.mapEmployee(employeeDTO);
         employee.setOrgId(orgId);
+
+        Optional<Organization> organization = organizationRepository.findById(orgId);
 
         if (!employeeDTO.getSkills().isEmpty()) {
             Set<EmployeeSkill> employeeSkillsList = new HashSet<>();
@@ -47,6 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 EmployeeSkill employeeSkill = new EmployeeSkill();
                 employeeSkill.setSkill(s.get());
                 employeeSkill.setEmployee(employee);
+                employeeSkill.setOrganization(organization.get());
                 employeeSkill.setIsPrimary(employeeSkillDto.getIsPrimary());
                 employeeSkill.setName(employeeSkillDto.getName());
                 employeeSkillsList.add(employeeSkill);
