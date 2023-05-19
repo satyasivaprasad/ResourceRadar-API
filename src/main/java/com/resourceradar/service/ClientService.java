@@ -1,5 +1,7 @@
 package com.resourceradar.service;
 
+import java.util.List;
+
 import com.resourceradar.dto.ClientDto;
 import com.resourceradar.entity.Client;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +16,6 @@ public interface ClientService {
 
        public String updateClientById(String id, String status);
 
-
+       public List<Client> getAllClients();
 
 }
