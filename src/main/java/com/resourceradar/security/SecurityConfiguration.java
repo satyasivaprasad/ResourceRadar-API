@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
@@ -29,30 +30,11 @@ public class SecurityConfiguration {
     public AuthenticationEntryPoint myAuthenticationEntryPoint() {
         return new EntryPoint();
     }
-    private static final String[] AUTH_WHITELIST = {
-            // -- Swagger UI v2
-            "/v2/api-docs",
-            "/swagger-resources",
-            "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
-            "/swagger-ui.html",
-            "/swagger-ui/index.htm",
-            "/webjars/**",
-            // -- Swagger UI v3 (OpenAPI)
-            "/v3/api-docs/**",
-            "/swagger*/**",
-            "/configuration/**",
-            "/webjars/**",
-            "/swagger-ui/**",
-            "/social"
-            // other public endpoints of your API may be appended to this array
-    };
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated()).exceptionHandling();
+        http.authorizeHttpRequests(auth -> auth.requestMatchers(new AntPathRequestMatcher("/social"), new AntPathRequestMatcher("/api/v1/employee")).permitAll().anyRequest().authenticated()).exceptionHandling();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authenticationProvider(new GoogleAuthProvider()).exceptionHandling()
                 .authenticationEntryPoint(myAuthenticationEntryPoint());
@@ -72,10 +54,9 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-
-
-
-
-
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/api/v1/employee", "/v2/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/swagger-resources", "/v3/api-docs/**", "/proxy/**");
+    }
 
 }
