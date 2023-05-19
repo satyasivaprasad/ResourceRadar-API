@@ -85,6 +85,15 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
+    @GetMapping(EndPointConfig.EMAIL_ID)
+    public ResponseEntity<Employee> getEmployeeByEmailID(@RequestParam("query") String query) {
+        Employee employee = employeeService.getEmployeeByEmailId(query);
+        if (employee == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+
     @GetMapping(EndPointConfig.EMPLOYEE_SEARCH)
     public ResponseEntity<List<Employee>> searchEmployee(@RequestParam("query") String query) throws EmployeeNotFoundException {
         List<Employee> employees = employeeService.searchEmployee(query);

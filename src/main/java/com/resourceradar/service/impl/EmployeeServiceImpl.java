@@ -78,6 +78,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee getEmployeeByEmailId(String emailId) {
+        return employeeRepository.findByEmail(emailId);
+    }
+
+    @Override
     public List<Employee> searchEmployee(String query) {
       List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(query, query);
       return Employees;
@@ -86,8 +91,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void findemployee(String id) {
 		Optional<Employee> employee = employeeRepository.findById(id);
 		 employee.get().setActive(false);
-
-		
 	}
 }
     

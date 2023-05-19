@@ -38,7 +38,7 @@ public class EndPointConfig  extends  Object {
     public  static  final  String EMPLOYEE_SEARCH = "/employeesearch";
 
 	public static final String ID = "/{orgId}";
-	
+    public static final String EMAIL_ID = "/emailId";
 
     public static final String APPLICATIONROLE = "/applicationrole";
     public static final String APPLICATIONROLE_SEARCH = "/applicationroleSearch";
