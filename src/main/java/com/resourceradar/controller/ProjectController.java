@@ -83,7 +83,7 @@ public class ProjectController {
 	    return null;
 	}
 	
-	@GetMapping("/{projectId}/manager")
+	@GetMapping("{projectId}/manager")
 	public Manager getProjectManager(@PathVariable String projectId) {
 	    Project project = projectService.getProjectById(projectId);
 	    if (project != null) {
@@ -92,7 +92,7 @@ public class ProjectController {
 	    return null;
 	}
 	
-	@PutMapping("{projectId}/manager")
+	@PutMapping("/{projectId}/manager")
 	public Project updateProjectManager(@PathVariable String projectId, @RequestBody Manager manager) {
 	    Project project = projectService.getProjectById(projectId);
 	    if (project != null) {
