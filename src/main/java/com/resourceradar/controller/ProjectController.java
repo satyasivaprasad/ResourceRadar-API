@@ -41,7 +41,7 @@ public class ProjectController {
 	    return "Project details saved successfully. Project ID: " + createdProject.getId();
 	}
 	
-	@PutMapping("/project/{projectId}")
+	@PutMapping("/{projectId}")
 	public ResponseEntity<Project> updateProject(@PathVariable String projectId, @RequestBody Project project) {
 	    Project existingProject = projectService.getProjectById(projectId);
 	    if (existingProject == null) {
@@ -83,7 +83,7 @@ public class ProjectController {
 	    return null;
 	}
 	
-	@GetMapping("/projects/{projectId}/manager")
+	@GetMapping("/{projectId}/manager")
 	public Manager getProjectManager(@PathVariable String projectId) {
 	    Project project = projectService.getProjectById(projectId);
 	    if (project != null) {
@@ -92,7 +92,7 @@ public class ProjectController {
 	    return null;
 	}
 	
-	@PutMapping("/projects/{projectId}/manager")
+	@PutMapping("{projectId}/manager")
 	public Project updateProjectManager(@PathVariable String projectId, @RequestBody Manager manager) {
 	    Project project = projectService.getProjectById(projectId);
 	    if (project != null) {
