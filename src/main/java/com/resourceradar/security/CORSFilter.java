@@ -27,7 +27,7 @@ public class CORSFilter extends OncePerRequestFilter {
         if ("OPTIONS".equals(request.getMethod())) {
             response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH");
             response.addHeader("Access-Control-Allow-Headers",
-                    "origin, content-type, accept, authorization, clientId, X-AUTH-TOKEN, cognitoToken, x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, x-datadog-sampled, accessToken");
+                    "origin, content-type, accept, authorization, clientId, orgId, orgid, X-AUTH-TOKEN, cognitoToken, x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, x-datadog-sampled, accessToken");
             response.addHeader("Access-Control-Max-Age", "1800");
             response.addHeader("Access-Control-Allow-Origin", "*");
             response.addHeader("Access-Control-Allow-Credentials", "true");
@@ -35,11 +35,12 @@ public class CORSFilter extends OncePerRequestFilter {
             return;
         }
         response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS, HEAD, DELETE, PATCH");
-        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, Authorization, clientId, X-AUTH-TOKEN, cognitoToken, x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, x-datadog-sampled, accessToken");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH");
+        response.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, Authorization, clientId, orgId, orgid, X-AUTH-TOKEN, cognitoToken, x-datadog-trace-id, x-datadog-parent-id, x-datadog-origin, x-datadog-sampling-priority, x-datadog-sampled, accessToken");
         response.addHeader("Access-Control-Max-Age", "1800");
         response.addHeader("Access-Control-Allow-Credentials", "true");
         response.addHeader("Access-Control-Expose-Headers", "Authorization,X-AUTH-TOKEN, Date, accessToken");
+
         filterChain.doFilter(request, response);
 
     }

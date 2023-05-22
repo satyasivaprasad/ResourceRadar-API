@@ -56,7 +56,7 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/api/v1/employee", "/api/v1/skills", "/api/v1/departments", "/v2/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/swagger-resources", "/v3/api-docs/**", "/proxy/**");
+        return (web) -> web.ignoring().requestMatchers("/api/v1/**", "/v2/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/swagger-resources", "/v3/api-docs/**", "/proxy/**");
     }
 
 }
