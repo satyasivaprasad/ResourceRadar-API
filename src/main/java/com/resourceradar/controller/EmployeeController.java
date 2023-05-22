@@ -1,7 +1,12 @@
 package com.resourceradar.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.resourceradar.dto.EmployeeSkillsDto;
+import com.resourceradar.entity.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,8 +86,16 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        List<EmployeeDto> employeesDto = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
+            Set<EmployeeSkillsDto> employeeSkillsDtos = employee.getSkills().stream().map((EmployeeMapper.INSTANCE::mapToDto)).collect(Collectors.toSet());
+            employeeDto.setSkills(employeeSkillsDtos);
+            employeesDto.add(employeeDto);
+        }
+        return employeesDto;
     }
 
     @GetMapping(EndPointConfig.ID)
@@ -117,7 +130,7 @@ public class EmployeeController {
     @DeleteMapping(EndPointConfig.ID)
     public String deleteEmployeeAllocation(@PathVariable("id") String id) {
 
-        employeeService.findemployee(id);
+        employeeService.deleteEmployee(id);
 
         return "Employee Deleted";
     }

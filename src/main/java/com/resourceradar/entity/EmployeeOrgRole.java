@@ -3,18 +3,21 @@ package com.resourceradar.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "employee_skill_mapping")
+@Table(name = "employee_org_application_role")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeSkill {
+public class EmployeeOrgRole {
     @EmbeddedId
     @JsonIgnore
-    private EmployeeSkillKey employeeSkills = new EmployeeSkillKey();
+    private EmployeeOrgRoleKey employeeOrgRoleKey = new EmployeeOrgRoleKey();
 
     @ManyToOne
     @MapsId("empId")
@@ -23,9 +26,9 @@ public class EmployeeSkill {
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId("skillId")
-    @JoinColumn(name = "skill_id")
-    private Skill skill;
+    @MapsId("roleId")
+    @JoinColumn(name = "role_id")
+    private ApplicationRole applicationRole;
 
     @ManyToOne
     @MapsId("orgID")
@@ -33,10 +36,7 @@ public class EmployeeSkill {
     @JsonBackReference
     private Organization organization;
 
-    @Column(name = "isPrimary")
-    private Boolean isPrimary;
-
-    @Column(name = "name")
+    @Column(name = "role_name")
     private String name;
 
 }
