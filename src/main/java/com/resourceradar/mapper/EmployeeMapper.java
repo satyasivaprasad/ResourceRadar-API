@@ -1,8 +1,10 @@
 package com.resourceradar.mapper;
 
 import com.resourceradar.dto.EmployeeDto;
+import com.resourceradar.dto.EmployeeOrgRolesDto;
 import com.resourceradar.dto.EmployeeSkillsDto;
 import com.resourceradar.entity.Employee;
+import com.resourceradar.entity.EmployeeOrgRole;
 import com.resourceradar.entity.EmployeeSkill;
 import com.resourceradar.entity.EmployeeSkillKey;
 import org.mapstruct.Mapper;
@@ -25,5 +27,7 @@ public interface EmployeeMapper {
 
     @Mapping(source = "employeeSkills.skillId", target = "id")
     EmployeeSkillsDto mapToDto(EmployeeSkill employeeSkill);
-    List<EmployeeSkillsDto> toEmployeeListDto(List<EmployeeSkill> employees);
+
+    @Mapping(source = "employeeOrgRoles.roleId", target = "id")
+    EmployeeOrgRolesDto mapToEmployeeOrgRolesDto(EmployeeOrgRole employeeOrgRole);
 }

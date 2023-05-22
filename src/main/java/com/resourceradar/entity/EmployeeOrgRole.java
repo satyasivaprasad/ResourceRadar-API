@@ -17,7 +17,7 @@ import lombok.Setter;
 public class EmployeeOrgRole {
     @EmbeddedId
     @JsonIgnore
-    private EmployeeOrgRoleKey employeeOrgRoleKey = new EmployeeOrgRoleKey();
+    private EmployeeOrgRoleKey employeeOrgRoles = new EmployeeOrgRoleKey();
 
     @ManyToOne
     @MapsId("empId")

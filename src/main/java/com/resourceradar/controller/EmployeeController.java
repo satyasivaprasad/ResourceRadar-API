@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.resourceradar.dto.EmployeeOrgRolesDto;
 import com.resourceradar.dto.EmployeeSkillsDto;
 import com.resourceradar.entity.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,8 @@ public class EmployeeController {
             EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
             Set<EmployeeSkillsDto> employeeSkillsDtos = employee.getSkills().stream().map((EmployeeMapper.INSTANCE::mapToDto)).collect(Collectors.toSet());
             employeeDto.setSkills(employeeSkillsDtos);
+            Set<EmployeeOrgRolesDto> employeeOrgRolesDtos = employee.getRoles().stream().map((EmployeeMapper.INSTANCE::mapToEmployeeOrgRolesDto)).collect(Collectors.toSet());
+            employeeDto.setRoles(employeeOrgRolesDtos);
             employeesDto.add(employeeDto);
         }
         return employeesDto;
