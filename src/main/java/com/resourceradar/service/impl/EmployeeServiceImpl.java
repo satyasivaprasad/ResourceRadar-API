@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.resourceradar.entity.Organization;
-import com.resourceradar.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
-	
-	@Autowired
-    private EmployeeRepository employeeRepository;
-	
-	@Autowired
-    private SkillsRepository skillsRepository;
 
     @Autowired
-    private OrganizationRepository organizationRepository;
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private SkillsRepository skillsRepository;
 
     @Override
     public Employee createEmployee(EmployeeDto employeeDTO, HttpServletRequest request) {
@@ -44,8 +39,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = EmployeeMapper.INSTANCE.mapEmployee(employeeDTO);
         employee.setOrgId(orgId);
 
-        Optional<Organization> organization = organizationRepository.findById(orgId);
-
         if (!employeeDTO.getSkills().isEmpty()) {
             Set<EmployeeSkill> employeeSkillsList = new HashSet<>();
             for (EmployeeSkillsDto employeeSkillDto :
@@ -54,7 +47,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 EmployeeSkill employeeSkill = new EmployeeSkill();
                 employeeSkill.setSkill(s.get());
                 employeeSkill.setEmployee(employee);
-                employeeSkill.setOrganization(organization.get());
                 employeeSkill.setIsPrimary(employeeSkillDto.getIsPrimary());
                 employeeSkill.setName(employeeSkillDto.getName());
                 employeeSkillsList.add(employeeSkill);
@@ -72,26 +64,35 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public Employee getEmployee(String id) {
+        Employee emp= employeeRepository.findById(id).orElse(null);
+        return emp;
+    }
+
     @Override
-    public Employee getEmployeeById(String id) {
-        return employeeRepository.findByOrgEmpId(id);
+    public List<Employee> searchEmployee(String firstname, String lastname) {
+        System.out.println(firstname);
+        List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstname,lastname);
+        return Employees;
+    }
+
+    public void findemployee(String id) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        System.out.println(employee.isActive());
+        employee.setActive(false);
+        System.out.println(employee.isActive());
+        employeeRepository.save(employee);
+
+
+    }
+    @Override
+    public Optional<Employee> getEmployeeById(String id) {
+        return Optional.empty();
     }
 
     @Override
     public Employee getEmployeeByEmailId(String emailId) {
         return employeeRepository.findByEmail(emailId);
     }
-
-    @Override
-    public List<Employee> searchEmployee(String query) {
-      List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(query, query);
-      return Employees;
-    }
-    
-	public void findemployee(String id) {
-		Optional<Employee> employee = employeeRepository.findById(id);
-		 employee.get().setActive(false);
-	}
 }
-    
 

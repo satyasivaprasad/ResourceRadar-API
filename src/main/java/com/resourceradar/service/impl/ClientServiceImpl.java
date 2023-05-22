@@ -4,20 +4,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.resourceradar.dto.ManagerDto;
-import com.resourceradar.entity.Manager;
-import com.resourceradar.enums.ClientStatus;
-import com.resourceradar.dto.ClientDto;
-import com.resourceradar.dto.ProjectDTO;
-import com.resourceradar.entity.Project;
-import com.resourceradar.repository.ManagerRepository;
-import com.resourceradar.service.ClientService;
-import com.resourceradar.entity.Client;
-import com.resourceradar.repository.ClientRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.resourceradar.dto.ClientDto;
+import com.resourceradar.dto.ManagerDto;
+import com.resourceradar.dto.ProjectDTO;
+import com.resourceradar.entity.Client;
+import com.resourceradar.entity.Manager;
+import com.resourceradar.entity.Project;
+import com.resourceradar.enums.ClientStatus;
+import com.resourceradar.repository.ClientRepository;
+import com.resourceradar.repository.ManagerRepository;
+import com.resourceradar.service.ClientService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
@@ -43,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
 			manager.setCreatedAt(managerDTO.getCreatedAt());
 			manager.setModifiedBy(managerDTO.getModifiedBy());
 			manager.setModifiedAt(managerDTO.getModifiedAt());
-			manager.setName(managerDTO.getName());
+			//manager.setName(managerDTO.getName());
 			manager.setType(managerDTO.getType());
 			client.setManager(manager);
 		}
@@ -136,7 +138,6 @@ public class ClientServiceImpl implements ClientService {
 							 clientDTO.setStatus(client.getStatus());
 			              Manager manager = client.getManager();
 						  ManagerDto managerDTO = new ManagerDto();
-						  managerDTO.setName(manager.getName());
 						  managerDTO.setType(manager.getType());
 								   clientDTO.setManagerDto(managerDTO);
 							 return  clientDTO;

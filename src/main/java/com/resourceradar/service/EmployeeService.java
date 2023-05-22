@@ -5,6 +5,7 @@ import com.resourceradar.entity.Employee;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeService {
 
@@ -12,9 +13,9 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
-    Employee getEmployeeById(String id);
+    Optional<Employee> getEmployeeById(String id);
 
-    List<Employee> searchEmployee(String query);
+    List<Employee> searchEmployee(String firstname, String lastname);
 
     Employee getEmployeeByEmailId(String id);
 }

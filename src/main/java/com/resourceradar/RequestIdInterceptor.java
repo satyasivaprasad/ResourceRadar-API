@@ -2,11 +2,14 @@ package com.resourceradar;
 
 import java.util.Map;
 import java.util.UUID;
+
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.HandlerMapping;
-import jakarta.servlet.http.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class RequestIdInterceptor implements HandlerInterceptor {
