@@ -46,7 +46,6 @@ public class Project {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    @JsonIgnore
     private Client client;
     
     @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

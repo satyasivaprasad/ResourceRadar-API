@@ -43,9 +43,9 @@ public class Client {
 	@Column(name = "end_date")
 	private LocalDateTime endDate;
 
-	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Project> projects = new ArrayList<>();
+//	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Project> projects = new ArrayList<>();
 
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "client")

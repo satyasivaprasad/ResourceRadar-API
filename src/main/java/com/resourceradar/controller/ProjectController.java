@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.resourceradar.config.EndPointConfig;
+import com.resourceradar.dto.ProjectDTO;
 import com.resourceradar.entity.Manager;
 import com.resourceradar.entity.Project;
 import com.resourceradar.exception.ProjectNotFoundException;
@@ -28,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(EndPointConfig.API_V1 + EndPointConfig.PROJECT_DETAILS)
-@Tag(name = "project_tbl")
+@Tag(name = "project")
 @Slf4j
 public class ProjectController {
 	
@@ -74,23 +75,20 @@ public class ProjectController {
 		}
 	}
 	@PostMapping("/{projectId}/manager")
-	public Project assignManagerToProject(@PathVariable String projectId, @RequestBody Manager manager) {
-	    Project project = projectService.getProjectById(projectId);
-	    if (project != null) {
-	        project.setManager(manager);
-	        return projectService.updateProject(project);
-	    }
-	    return null;
+	public ProjectDTO assignManagerToProject(@PathVariable String projectId, @RequestBody Manager manager) {
+	    ProjectDTO project = projectService.assignManagerToProject(projectId,manager);
+	    return project;
 	}
+
+	
 	
 	@GetMapping("{projectId}/manager")
-	public Manager getProjectManager(@PathVariable String projectId) {
-	    Project project = projectService.getProjectById(projectId);
-	    if (project != null) {
-	        return project.getManager();
-	    }
-	    return null;
+	public ProjectDTO getProjectManager(@PathVariable String projectId) {
+	    ProjectDTO project = projectService.getProjectManager(projectId);
+	    
+	    return project;
 	}
+	
 	
 	@PutMapping("/{projectId}/manager")
 	public Project updateProjectManager(@PathVariable String projectId, @RequestBody Manager manager) {
