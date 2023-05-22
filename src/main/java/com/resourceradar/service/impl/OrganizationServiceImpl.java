@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.resourceradar.entity.Designation;
-import com.resourceradar.entity.Organization;
-import com.resourceradar.entity.Practice;
-import com.resourceradar.entity.Skill;
-import com.resourceradar.repository.DesignationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +13,17 @@ import com.resourceradar.dto.OrganizationDTO;
 import com.resourceradar.dto.PracticeDTO;
 import com.resourceradar.dto.SkillDTO;
 import com.resourceradar.entity.Department;
+import com.resourceradar.entity.Designation;
+import com.resourceradar.entity.Organization;
+import com.resourceradar.entity.Practice;
+import com.resourceradar.entity.Skill;
 import com.resourceradar.repository.DepartmentRepository;
+import com.resourceradar.repository.DesignationRepository;
 import com.resourceradar.repository.OrganizationRepository;
 import com.resourceradar.repository.PracticeRepository;
 import com.resourceradar.repository.SkillsRepository;
 import com.resourceradar.service.OrganizationService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -54,11 +53,11 @@ public class OrganizationServiceImpl implements OrganizationService {
 	}
 
 	@Override
-	public OrganizationDTO getOrgCompleteDetails(HttpServletRequest request) {
+	public OrganizationDTO getOrgCompleteDetails(String request) {
 		
-		String orgId = request.getHeader("orgId");
+		//String orgId = request.getHeader("orgId");
 		OrganizationDTO org = new OrganizationDTO();
-		Optional<Organization> orgOpt = organizationRepository.findById(orgId);
+		Optional<Organization> orgOpt = organizationRepository.findById(request);
 		if (orgOpt.isPresent()) {
 			org.setId(orgOpt.get().getId());
 			org.setName(orgOpt.get().getName());
@@ -100,37 +99,41 @@ public class OrganizationServiceImpl implements OrganizationService {
 		org.setDesignations(designationDTOs);
 
 		List<Practice> practices = practiceRepository.findAll();
-		List<PracticeDTO> practiceDTOs = new ArrayList<>();
-		/*if (!practices.isEmpty()) {
-			for (Practice practice : practices) {
-				PracticeDTO practiceDTO = new PracticeDTO();
-				practiceDTO.setId(practice.getId());
-				practiceDTO.setName(practice.getName());
-				practiceDTO.setCreatedDateTime(practice.getCreatedDate());
-				practiceDTO.setModifiedDateTime(practice.getModifiedDate());
-				
-				practiceDTOs.add(practiceDTO);
-			}
-		}
-*/		org.setPractices(practiceDTOs);
+        List<PracticeDTO> practiceDTOs = new ArrayList<>();
+        if (!practices.isEmpty()) {
+            for (Practice practice : practices) {
+                PracticeDTO practiceDTO = new PracticeDTO();
+                practiceDTO.setOrgId(practice.getId());
+                practiceDTO.setName(practice.getName());
+                practiceDTO.setOrgId(practice.getOrgId());
+                practiceDTO.setStartDate(practice.getCreatedDate());
+                practiceDTO.setEndDate(practice.getModifiedDate());
+                
+                practiceDTOs.add(practiceDTO);
+            }
+        }
+        org.setPractices(practiceDTOs);
 
-		List<Skill> skills = skillsRepository.findAll();
-		List<SkillDTO> skillsDTOs = new ArrayList<>();
-		if (!skills.isEmpty()) {
-			for (Skill skill : skills) {
-				SkillDTO skillsDTO = new SkillDTO();
-				skillsDTO.setId(skill.getId());
-				skillsDTO.setName(skill.getName());
-				skillsDTOs.add(skillsDTO);
-			}
-		}
-		org.setSkills(skillsDTOs);
-		return org;
+        List<Skill> skills = skillsRepository.findAll();
+        List<SkillDTO> skillsDTOs = new ArrayList<>();
+        if (!skills.isEmpty()) {
+             log.info("checking is Skills empty ");
+            for (Skill skill : skills) {
+                SkillDTO skillsDTO = new SkillDTO();
+                skillsDTO.setId(skill.getId());
+                skillsDTO.setName(skill.getName());
+                skillsDTOs.add(skillsDTO);
+            }
+        }
+        org.setSkills(skillsDTOs);
+        return org;
+
+ 
+    }
 
 	}
 		
 		
-	}
 
 
 

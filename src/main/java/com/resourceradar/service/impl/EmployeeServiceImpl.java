@@ -72,22 +72,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-    @Override
-    public Employee getEmployeeById(String id) {
-        return employeeRepository.findByOrgEmpId(id);
+    public Employee getEmployee(String id) {
+    	Employee emp= employeeRepository.findById(id).orElse(null);
+    	return emp;
     }
 
     @Override
-    public List<Employee> searchEmployee(String query) {
-      List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(query, query);
+    public List<Employee> searchEmployee(String firstname, String lastname) {
+    	System.out.println(firstname);
+      List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstname,lastname);
       return Employees;
     }
     
 	public void findemployee(String id) {
-		Optional<Employee> employee = employeeRepository.findById(id);
-		 employee.get().setActive(false);
+		Employee employee = employeeRepository.findById(id).orElse(null);
+		System.out.println(employee.isActive());
+		 employee.setActive(false);
+		 System.out.println(employee.isActive());
+		 employeeRepository.save(employee);
 
 		
+	}
+	@Override
+	public Optional<Employee> getEmployeeById(String id) {
+		return Optional.empty();
 	}
 }
     

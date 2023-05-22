@@ -1,11 +1,19 @@
 package com.resourceradar.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
-import lombok.Data;
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "manager_tbl")
@@ -16,11 +24,26 @@ public class Manager {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    @Column(name = "name")
-    private String name;
+    
+    @Column(name = "emp_id")
+    private String employeeId;
 
     @Column(name = "type")
     private  String type;
+    
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Project project;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "org_id")
+    private Organization organization;
+    
     @Column(name = "created_by")
     private String createdBy;
 
@@ -32,12 +55,12 @@ public class Manager {
 
     @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
+    
+    public Manager() {
+    }
+    public Manager(String id) {
+        this.id = id;
+    }
 
-
-    @OneToOne
-    @JoinColumn(name = "client_id")
-    @JsonBackReference
-    private  Client client;
-
-    // getters and setters
+    // Getters and Setters, constructors, and other methods
 }
