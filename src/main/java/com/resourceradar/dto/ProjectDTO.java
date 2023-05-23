@@ -10,7 +10,7 @@ import lombok.Data;
 public class ProjectDTO {
 
     private String id;
-    private String projectname;
+    private String name;
     private String employeeId;
     private String type;
     private String clientId;

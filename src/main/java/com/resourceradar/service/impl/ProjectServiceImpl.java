@@ -65,7 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
 		prd.setType(mngr.getType());
 		prd.setClientId(clientid);
 		prd.setOrgId(orgid);
-		prd.setProjectname(project.getName());		
+		prd.setName(project.getName());		
 		prd.setEmployeeId(employeeid);
 		prd.setStartDate(startDate);
 		prd.setEndDate(endDate);
@@ -92,7 +92,7 @@ public class ProjectServiceImpl implements ProjectService {
 		projectDto.setOrgId(orgId);
 		projectDto.setStartDate(project.getStartDate());
 		projectDto.setEndDate(project.getEndDate());
-		projectDto.setProjectname(project.getName());
+		projectDto.setName(project.getName());
 		
 		return projectDto;
 	}
