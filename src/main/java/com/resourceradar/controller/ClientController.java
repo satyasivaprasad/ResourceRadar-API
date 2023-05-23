@@ -1,19 +1,29 @@
 package com.resourceradar.controller;
 
-import com.resourceradar.dto.ClientDto;
-import com.resourceradar.config.EndPointConfig;
-import com.resourceradar.entity.Client;
-import com.resourceradar.service.impl.ClientServiceImpl;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.resourceradar.config.EndPointConfig;
+import com.resourceradar.dto.ClientDto;
+import com.resourceradar.dto.ClientPDto;
+import com.resourceradar.dto.ClientsDto;
+import com.resourceradar.dto.ManagerDto;
+import com.resourceradar.entity.Client;
+import com.resourceradar.entity.Manager;
+import com.resourceradar.service.impl.ClientServiceImpl;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(EndPointConfig.API_V1 + EndPointConfig.CLIENT)
@@ -24,22 +34,18 @@ public class ClientController {
     @Autowired
     private ClientServiceImpl clientService;
 
-    @PostMapping()
-    public String createClient(@RequestBody ClientDto clientDTO, HttpServletRequest request) {
-        Client client = clientService.createClient(clientDTO, request);
-        return "client details saved successfully" + client.getId();
-    }
+//    @PostMapping()
+//    public String createClient(@RequestBody ClientDto clientDTO, HttpServletRequest request) {
+//        Client client = clientService.createClient(clientDTO, request);
+//        return "client details saved successfully" + client.getId();
+//    }
 
-    @PostMapping("/manager")
-    public String createClientWithmanager(@RequestBody ClientDto clientDTO, HttpServletRequest request) {
-        Client client = clientService.createClientWithManger(clientDTO, request);
-        return "client details saved successfully" + client.getId();
-    }
+   
 
     @GetMapping("/{clientId}")
-    public ResponseEntity<ClientDto> getClientById(@PathVariable String clientId, HttpServletRequest request) {
+    public ResponseEntity<ClientsDto> getClientById(@PathVariable String clientId) {
         try {
-            ClientDto clientDTO = clientService.getClientById(clientId, request);
+            ClientsDto clientDTO = clientService.getClientById(clientId);
             if (clientDTO == null) {
                 return ResponseEntity.notFound().build();
             }
@@ -51,16 +57,35 @@ public class ClientController {
     }
 
     @PutMapping("/{clientId}")
-    public String updateClientStatusById(@RequestBody ClientDto clientDTO, @PathVariable("clientId") String id) {
-        String updated = clientService.updateClientById(clientDTO.getStatus(), id);
-        log.info(clientDTO.getStatus() + "    " + id);
-        return updated;
+    public Client updateClientStatusById( @PathVariable String clientId,@RequestBody Client clientDTO) {
+        Client c = clientService.updateClientById(clientId,clientDTO);
+        log.info(clientDTO.getStatus() + "    " + clientId);
+        return c;
     }
     @GetMapping()
     public List<Client> getAllClients(){
 
     	List<Client> allClients = clientService.getAllClients();
     	return allClients;
+    }
+    
+    @PostMapping("")
+    public Client addClient(@RequestBody Client client) {
+    	Client client2 = clientService.addClient(client);
+    	return client2;
+    }
+    
+    @PostMapping("/{clientid}/manager")
+    public ClientPDto addManagerToClient(@PathVariable String clientid, @RequestBody Manager manager) {
+    	ClientPDto createClientWithManger = clientService.createClientWithManger(clientid, manager);
+    	return createClientWithManger;
+    	
+    }
+    
+    @PutMapping("/{clientId}/manager")
+    public ManagerDto updateManager(@PathVariable String clientId,@RequestBody Manager manager) {
+    	ManagerDto updateClientManager = clientService.updateClientManager(clientId, manager);
+    	return updateClientManager;
     }
 
 }

@@ -50,13 +50,6 @@ public class Client {
 	@JsonManagedReference
 	private Manager manager;
 
-	public  void setManager(Manager manager)
-	{
-		 if(manager !=null)
-		 {
-			   manager.setClient(this);
-		 }
-		 this.manager= manager;
-	}
+	
 
 }
