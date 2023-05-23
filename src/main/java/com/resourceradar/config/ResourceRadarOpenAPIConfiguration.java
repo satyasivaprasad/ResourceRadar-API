@@ -10,9 +10,9 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 @OpenAPIDefinition(
         info =
         @Info(
-                title = "Resource Radar API",
+                title = "Resource Radar API v1",
                 description = "This API offers a wide range of project management features, including the ability to add employees, create new projects, and allocate resources",
-                version = "1.0",
+                version = "1.1.6",
                 contact = @Contact(name = "Fission Labs", email = "info@fissionlabs.com")),
         security = @SecurityRequirement(name = "bearerAuth"))
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "bearerAuth", scheme = "Bearer")

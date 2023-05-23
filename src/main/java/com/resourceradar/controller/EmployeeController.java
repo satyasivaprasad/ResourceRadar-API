@@ -1,5 +1,26 @@
 package com.resourceradar.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import com.resourceradar.dto.EmployeeOrgRolesDto;
+import com.resourceradar.dto.EmployeeSkillsDto;
+import com.resourceradar.entity.EmployeeSkill;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -13,15 +34,9 @@ import com.resourceradar.repository.EmployeeAuditRepository;
 import com.resourceradar.repository.EmployeeRepository;
 import com.resourceradar.service.impl.EmployeeServiceImpl;
 import com.resourceradar.utils.Validator;
+
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(EndPointConfig.API_V1 + EndPointConfig.EMPLOYEE)
@@ -72,13 +87,32 @@ public class EmployeeController {
     }
 
     @GetMapping()
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        List<EmployeeDto> employeesDto = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
+            Set<EmployeeSkillsDto> employeeSkillsDtos = employee.getSkills().stream().map((EmployeeMapper.INSTANCE::mapToDto)).collect(Collectors.toSet());
+            employeeDto.setSkills(employeeSkillsDtos);
+            Set<EmployeeOrgRolesDto> employeeOrgRolesDtos = employee.getRoles().stream().map((EmployeeMapper.INSTANCE::mapToEmployeeOrgRolesDto)).collect(Collectors.toSet());
+            employeeDto.setRoles(employeeOrgRolesDtos);
+            employeesDto.add(employeeDto);
+        }
+        return employeesDto;
     }
 
     @GetMapping(EndPointConfig.ID)
-    public ResponseEntity<Employee> getEmployeeByOrgId(@PathVariable String orgId) {
-        Employee employee = employeeService.getEmployeeById(orgId);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable String id) {
+        Employee employee = employeeService.getEmployee(id);
+        if (employee == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+
+    @GetMapping(EndPointConfig.EMAIL_ID)
+    public ResponseEntity<Employee> getEmployeeByEmailID(@RequestParam("query") String query) {
+        Employee employee = employeeService.getEmployeeByEmailId(query);
         if (employee == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -86,8 +120,8 @@ public class EmployeeController {
     }
 
     @GetMapping(EndPointConfig.EMPLOYEE_SEARCH)
-    public ResponseEntity<List<Employee>> searchEmployee(@RequestParam("query") String query) throws EmployeeNotFoundException {
-        List<Employee> employees = employeeService.searchEmployee(query);
+    public ResponseEntity<List<Employee>> searchEmployee(@RequestParam String firstname,@RequestParam String lastname) throws EmployeeNotFoundException {
+        List<Employee> employees = employeeService.searchEmployee(firstname,lastname);
 
         if (employees.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -99,7 +133,7 @@ public class EmployeeController {
     @DeleteMapping(EndPointConfig.ID)
     public String deleteEmployeeAllocation(@PathVariable("id") String id) {
 
-        employeeService.findemployee(id);
+        employeeService.deleteEmployee(id);
 
         return "Employee Deleted";
     }

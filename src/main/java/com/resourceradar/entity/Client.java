@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -42,12 +43,14 @@ public class Client {
 	@Column(name = "end_date")
 	private LocalDateTime endDate;
 
-	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Project> projects = new ArrayList<>();
+//	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Project> projects = new ArrayList<>();
 
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "client")
 	@JsonManagedReference
+	@JsonIgnore
 	private Manager manager;
 
 	

@@ -7,18 +7,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
 @Getter
 @Setter
 @EqualsAndHashCode
-public class EmployeeSkillKey implements Serializable {
+public class EmployeeOrgRoleKey implements Serializable {
     @Column(name = "emp_id")
     private String empId;
 
-    @Column(name = "skill_id")
-    private String skillId;
+    @Column(name = "role_id")
+    private String roleId;
 
     @Column(name = "org_id")
     private String orgID;

@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import com.resourceradar.dto.EmployeeOrgRolesDto;
+import com.resourceradar.entity.*;
+import com.resourceradar.repository.ApplicationRoleRepository;
+import com.resourceradar.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.resourceradar.dto.EmployeeDto;
 import com.resourceradar.dto.EmployeeSkillsDto;
-import com.resourceradar.entity.Employee;
-import com.resourceradar.entity.EmployeeSkill;
-import com.resourceradar.entity.Skill;
 import com.resourceradar.mapper.EmployeeMapper;
 import com.resourceradar.repository.EmployeeRepository;
 import com.resourceradar.repository.SkillsRepository;
@@ -24,21 +25,30 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
-	
-	@Autowired
+
+    @Autowired
     private EmployeeRepository employeeRepository;
-	
-	@Autowired
+
+    @Autowired
     private SkillsRepository skillsRepository;
+
+    @Autowired
+    private ApplicationRoleRepository applicationRoleRepository;
+
+    @Autowired
+    private OrganizationRepository organizationRepository;
 
     @Override
     public Employee createEmployee(EmployeeDto employeeDTO, HttpServletRequest request) {
 
         String orgId = request.getHeader("orgId");
 
+        Optional<Organization> organization = organizationRepository.findById(orgId);
+
         Employee employee = EmployeeMapper.INSTANCE.mapEmployee(employeeDTO);
         employee.setOrgId(orgId);
 
+        // TODO: Refactor using mapper
         if (!employeeDTO.getSkills().isEmpty()) {
             Set<EmployeeSkill> employeeSkillsList = new HashSet<>();
             for (EmployeeSkillsDto employeeSkillDto :
@@ -49,9 +59,25 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employeeSkill.setEmployee(employee);
                 employeeSkill.setIsPrimary(employeeSkillDto.getIsPrimary());
                 employeeSkill.setName(employeeSkillDto.getName());
+                employeeSkill.setOrganization(organization.get());
                 employeeSkillsList.add(employeeSkill);
             }
             employee.setSkills(employeeSkillsList);
+        }
+
+        if (!employeeDTO.getRoles().isEmpty()) {
+            Set<EmployeeOrgRole> employeeOrgRoles = new HashSet<>();
+            for (EmployeeOrgRolesDto employeeOrgRoleDto :
+                    employeeDTO.getRoles()) {
+                Optional<ApplicationRole> s = applicationRoleRepository.findById(employeeOrgRoleDto.getId());
+                EmployeeOrgRole employeeOrgRole = new EmployeeOrgRole();
+                employeeOrgRole.setApplicationRole(s.get());
+                employeeOrgRole.setEmployee(employee);
+                employeeOrgRole.setName(employeeOrgRoleDto.getName());
+                employeeOrgRole.setOrganization(organization.get());
+                employeeOrgRoles.add(employeeOrgRole);
+            }
+            employee.setRoles(employeeOrgRoles);
         }
 
         Employee savedEmployee = employeeRepository.save(employee);
@@ -64,23 +90,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
-    @Override
-    public Employee getEmployeeById(String id) {
-        return employeeRepository.findByOrgEmpId(id);
+    public Employee getEmployee(String id) {
+        Employee emp= employeeRepository.findById(id).orElse(null);
+        return emp;
     }
 
     @Override
-    public List<Employee> searchEmployee(String query) {
-      List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(query, query);
+    public List<Employee> searchEmployee(String firstname, String lastname) {
+      List<Employee> Employees = employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(firstname,lastname);
       return Employees;
     }
-    
-	public void findemployee(String id) {
-		Optional<Employee> employee = employeeRepository.findById(id);
-		 employee.get().setActive(false);
 
-		
-	}
+	public void deleteEmployee(String id) {
+		Employee employee = employeeRepository.findById(id).orElse(null);
+		 employee.setActive(false);
+		 employeeRepository.save(employee);
+    }
+    @Override
+    public Optional<Employee> getEmployeeById(String id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Employee getEmployeeByEmailId(String emailId) {
+        return employeeRepository.findByEmail(emailId);
+    }
 }
-    
 

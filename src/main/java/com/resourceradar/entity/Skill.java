@@ -1,5 +1,6 @@
 package com.resourceradar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -38,6 +39,7 @@ public class Skill extends Auditable {
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) 
 	@JoinColumn(name = "org_id")
 	@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
+	@JsonIgnore
 	private Organization organization;
 
 }

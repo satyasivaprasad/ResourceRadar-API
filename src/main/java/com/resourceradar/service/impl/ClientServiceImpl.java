@@ -1,7 +1,6 @@
 package com.resourceradar.service.impl;
 
 import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,12 @@ import com.resourceradar.dto.ClientsDto;
 import com.resourceradar.dto.ManagerDto;
 import com.resourceradar.entity.Client;
 import com.resourceradar.entity.Manager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.resourceradar.dto.ProjectDTO;
+import com.resourceradar.entity.Project;
+import com.resourceradar.enums.ClientStatus;
 import com.resourceradar.repository.ClientRepository;
 import com.resourceradar.repository.ManagerRepository;
 import com.resourceradar.service.ClientService;
@@ -59,9 +64,8 @@ public class ClientServiceImpl implements ClientService {
 		cl.setName(c.getName());
 		cl.setStatus(c.getStatus());
 		cl.setType(manager2.getType());
-		
-		
 		return cl;
+
 	}
 
 //	@Override
@@ -69,6 +73,7 @@ public class ClientServiceImpl implements ClientService {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+
 
 	@Override
 	public ClientsDto getClientById(String id){
@@ -89,6 +94,7 @@ public class ClientServiceImpl implements ClientService {
 		
 		
 		return cl;
+
 	}
 
 	@Override
