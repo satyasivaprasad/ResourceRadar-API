@@ -28,6 +28,9 @@ public class Manager {
     @Column(name = "emp_id")
     private String employeeId;
 
+    @Column(name = "name")
+    private String name;
+    
     @Column(name = "type")
     private  String type;
     
