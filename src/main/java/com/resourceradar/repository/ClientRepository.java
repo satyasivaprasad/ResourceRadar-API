@@ -1,8 +1,10 @@
 package com.resourceradar.repository;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,5 +27,7 @@ public interface ClientRepository extends JpaRepository<Client, String> {
 	@Transactional
 	int updateClientStatusById(@Param("id") String id, @Param("status") String status);
 
+//	Page<Client> findAll(Pageable pageable);
+//
 
 }

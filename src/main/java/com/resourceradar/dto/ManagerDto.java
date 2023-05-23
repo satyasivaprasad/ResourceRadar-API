@@ -9,9 +9,16 @@ public class ManagerDto {
 
    private String id;
 
-    private String name;
-
     private  String type;
+    
+    private  String employee;
+    
+    private  String client;
+    
+    private  String projectId; 
+    
+    private  String orgId;
+    
     private String createdBy;
 
     private String modifiedBy;
@@ -19,5 +26,10 @@ public class ManagerDto {
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;
+    
+    private String name;
+    
+    
+
 
 }

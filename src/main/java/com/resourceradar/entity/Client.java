@@ -1,13 +1,22 @@
 package com.resourceradar.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,21 +51,15 @@ public class Client {
 	@Column(name = "end_date")
 	private LocalDateTime endDate;
 
-	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Project> projects = new ArrayList<>();
+//	@OneToMany(mappedBy = "client",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	private List<Project> projects = new ArrayList<>();
 
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "client")
-	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "managet_id")
+	@JsonIgnore
 	private Manager manager;
 
-	public  void setManager(Manager manager)
-	{
-		 if(manager !=null)
-		 {
-			   manager.setClient(this);
-		 }
-		 this.manager= manager;
-	}
+	
 
 }

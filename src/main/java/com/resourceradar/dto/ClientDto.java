@@ -1,9 +1,10 @@
 package com.resourceradar.dto;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
-import java.util.List;
+
+import com.resourceradar.entity.Manager;
+
+import lombok.Data;
 
 @Data
 public class ClientDto {
@@ -14,7 +15,7 @@ public class ClientDto {
     private String orgId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private List<ProjectDTO> projects;
-    private ManagerDto managerDto;
+//  private List<ProjectDTO> projects;
+    private Manager manager;
 
 }

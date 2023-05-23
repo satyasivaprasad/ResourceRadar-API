@@ -26,8 +26,8 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Project> findAllProjectsBYClientId(String clientId) {
 		Optional<Client> client = clientRepository.findById(clientId);
-		List<Project> projects = client.get().getProjects();
-		return projects;
+	//	List<Project> projects = client.get().getProjects();
+		return null;
 	}
 	@Override
 	public List<Project> getAllProjects() throws ProjectNotFoundException {
@@ -42,14 +42,14 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Project> getProjectBasedOnClineId(String clientId) {
 		Optional<Client> client = clientRepository.findById(clientId);
-		List<Project> projects = client.get().getProjects();
-		return projects;
+		//List<Project> projects = client.get().getProjects();
+		return null;
 	}
 	@Override
 	public List<Project> getProjectBasedOnClientId(String clientId) {
 		Optional<Client> client = clientRepository.findById(clientId);
-		List<Project> projects = client.get().getProjects();
-		return projects;
+//		List<Project> projects = client.get().getProjects();
+		return null;
 	}
 	@Override
 	public Page<Project> getAllProjects(Pageable pageable) throws ProjectNotFoundException {
