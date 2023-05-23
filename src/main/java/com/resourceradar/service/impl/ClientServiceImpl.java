@@ -46,7 +46,7 @@ public class ClientServiceImpl implements ClientService {
 			manager.setModifiedBy(managerDTO.getModifiedBy());
 			manager.setModifiedAt(managerDTO.getModifiedAt());
 			//manager.setName(managerDTO.getName());
-			manager.setType(managerDTO.getType());
+			//manager.setType(managerDTO.getType());
 			client.setManager(manager);
 		}
 
@@ -54,9 +54,9 @@ public class ClientServiceImpl implements ClientService {
 
 		client.setName(clientDTO.getName());
 		if (clientDTO.getEndDate() != null) {
-			client.setStatus(String.valueOf(ClientStatus.INACTIVE));
+			client.setStatus(String.valueOf(ClientStatus.INPROGRESS));
 		} else {
-			client.setStatus(String.valueOf(ClientStatus.ACTIVE));
+			client.setStatus(String.valueOf(ClientStatus.COMPLETED));
 		}
 		client.setStartDate(clientDTO.getStartDate());
 		client.setEndDate(clientDTO.getEndDate());
@@ -68,7 +68,7 @@ public class ClientServiceImpl implements ClientService {
 			List<Project> projects = projectDTOList.stream()
 					.map(projectDTO -> {
 						Project project = new Project();
-						project.setName(projectDTO.getName());
+						////project.setName(projectDTO.getName());
 						project.setType(projectDTO.getType());
 						project.setOrgId(orgId);
 						project.setStartDate(projectDTO.getStartDate());
@@ -77,7 +77,7 @@ public class ClientServiceImpl implements ClientService {
 						return project;
 					})
 					.collect(Collectors.toList());
-			client.setProjects(projects);
+			//client.setProjects(projects);
 		}
 
 		return clientRepository.save(client);
@@ -95,11 +95,11 @@ public class ClientServiceImpl implements ClientService {
 		 client.setName(clientDTO.getName());
 		 if(clientDTO.getEndDate() !=null)
 		 {
-			 client.setStatus(String.valueOf(ClientStatus.INACTIVE));
+			 client.setStatus(String.valueOf(ClientStatus.INPROGRESS));
 		 }
          else
 		 {
-			  client.setStatus(String.valueOf(ClientStatus.ACTIVE));
+			  client.setStatus(String.valueOf(ClientStatus.COMPLETED));
 		 }
 
 		 client.setStartDate(clientDTO.getStartDate());
@@ -110,7 +110,7 @@ public class ClientServiceImpl implements ClientService {
 		List<Project> projects = projectDTOList.stream()
 				.map(projectDTO -> {
 					Project project = new Project();
-					project.setName(projectDTO.getName());
+				//	project.setName(projectDTO.getName());
 					project.setType(projectDTO.getType());
 					project.setOrgId(orgId);
 					project.setStartDate(projectDTO.getStartDate());
@@ -120,7 +120,7 @@ public class ClientServiceImpl implements ClientService {
 				})
 				.collect(Collectors.toList());
 
-		client.setProjects(projects);
+		//client.setProjects(projects);
 		 return   clientRepository.save(client);
 	}
 
@@ -138,7 +138,7 @@ public class ClientServiceImpl implements ClientService {
 							 clientDTO.setStatus(client.getStatus());
 			              Manager manager = client.getManager();
 						  ManagerDto managerDTO = new ManagerDto();
-						  managerDTO.setType(manager.getType());
+						//  managerDTO.setType(manager.getType());
 								   clientDTO.setManagerDto(managerDTO);
 							 return  clientDTO;
 			} else {
