@@ -113,4 +113,8 @@ public class Employee implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<EmployeeSkill> skills = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<EmployeeOrgRole> roles = new HashSet<>();
 }

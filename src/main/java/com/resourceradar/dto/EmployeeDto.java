@@ -35,4 +35,5 @@ public class EmployeeDto {
     private LocalDateTime modifiedTime;
 
     private Set<EmployeeSkillsDto> skills = new HashSet<>();
+    private Set<EmployeeOrgRolesDto> roles = new HashSet<>();
 }
