@@ -20,5 +20,7 @@ public class ManagerDto {
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;
+    
+    private String clientId;
 
 }

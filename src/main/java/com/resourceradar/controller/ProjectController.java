@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.resourceradar.config.EndPointConfig;
+import com.resourceradar.dto.ManagerDto;
 import com.resourceradar.dto.ProjectDTO;
+import com.resourceradar.dto.ProjectPostDTO;
+import com.resourceradar.dto.ProjectsDTO;
 import com.resourceradar.entity.Manager;
 import com.resourceradar.entity.Project;
 import com.resourceradar.exception.ProjectNotFoundException;
@@ -37,22 +40,15 @@ public class ProjectController {
 	public ProjectService projectService;
 
 	@PostMapping()
-    public String createProject(@RequestBody Project project) {
-		Project createdProject = projectService.createProject(project);
+    public String createProject(@RequestBody ProjectDTO projectDTO) {
+		Project createdProject = projectService.createProject(projectDTO);
 	    return "Project details saved successfully. Project ID: " + createdProject.getId();
 	}
 	
-	@PutMapping("/{projectId}")
-	public ResponseEntity<Project> updateProject(@PathVariable String projectId, @RequestBody Project project) {
-	    Project existingProject = projectService.getProjectById(projectId);
-	    if (existingProject == null) {
-	        return ResponseEntity.notFound().build();
-	    }
-	    
-	    project.setId(projectId); 
-	    Project updatedProject = projectService.updateProject(project);
-	    
-	    return ResponseEntity.ok(updatedProject);
+	@PutMapping("/{projectId}/project")
+	public Project updateProject(@PathVariable String projectId, @RequestBody Project project) {
+	    Project existingProject = projectService.updateProject(projectId,project);
+	    return existingProject;
 	}
 
     @GetMapping("/{projectId}")
@@ -75,29 +71,25 @@ public class ProjectController {
 		}
 	}
 	@PostMapping("/{projectId}/manager")
-	public ProjectDTO assignManagerToProject(@PathVariable String projectId, @RequestBody Manager manager) {
-	    ProjectDTO project = projectService.assignManagerToProject(projectId,manager);
+	public ProjectPostDTO assignManagerToProject(@PathVariable String projectId, @RequestBody Manager manager) {
+		ProjectPostDTO project = projectService.assignManagerToProject(projectId,manager);
 	    return project;
 	}
 
 	
 	
 	@GetMapping("{projectId}/manager")
-	public ProjectDTO getProjectManager(@PathVariable String projectId) {
-	    ProjectDTO project = projectService.getProjectManager(projectId);
+	public ProjectsDTO getProjectManager(@PathVariable String projectId) {
+	    ProjectsDTO project = projectService.getProjectManager(projectId);
 	    
 	    return project;
 	}
 	
 	
 	@PutMapping("/{projectId}/manager")
-	public Project updateProjectManager(@PathVariable String projectId, @RequestBody Manager manager) {
-	    Project project = projectService.getProjectById(projectId);
-	    if (project != null) {
-	        project.setManager(manager);
-	        return projectService.updateProject(project);
-	    }
-	    return null;
+	public ManagerDto updateProjectManager(@PathVariable String projectId, @RequestBody Manager manager) {
+		ManagerDto updateProjectManager = projectService.updateProjectManager(projectId, manager);
+		return updateProjectManager;
 	}
 	
 	
