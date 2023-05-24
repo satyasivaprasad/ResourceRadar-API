@@ -2,20 +2,29 @@ package com.resourceradar.service;
 
 import java.util.List;
 
-import com.resourceradar.dto.ClientDto;
+import com.resourceradar.dto.ClientPDto;
+import com.resourceradar.dto.ClientsDto;
+import com.resourceradar.dto.ManagerDto;
 import com.resourceradar.entity.Client;
-import jakarta.servlet.http.HttpServletRequest;
+import com.resourceradar.entity.Manager;
 
 public interface ClientService {
 
 
-       public Client createClientWithManger(ClientDto clientDTO, HttpServletRequest request);
-       public Client createClient(ClientDto clientDTO, HttpServletRequest request);
+       public ClientPDto createClientWithManger(String clientid,Manager manager);
+//       public Client createClient(ClientDto clientDTO, HttpServletRequest request);
 
-       public ClientDto getClientById(String id, HttpServletRequest request) throws Exception;
+       public ClientsDto getClientById(String id);
 
-       public String updateClientById(String id, String status);
+       public Client updateClientById(String id,Client client);
 
        public List<Client> getAllClients();
+       
+       public Client addClient(Client client);
+       
+       public ManagerDto updateClientManager(String clientId, Manager manager);       
+       
+       
+       
 
 }

@@ -53,13 +53,6 @@ public class Client {
 	@JsonIgnore
 	private Manager manager;
 
-	public  void setManager(Manager manager)
-	{
-		 if(manager !=null)
-		 {
-			   manager.setClient(this);
-		 }
-		 this.manager= manager;
-	}
+	
 
 }
