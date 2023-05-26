@@ -34,11 +34,11 @@ public class ClientController {
     @Autowired
     private ClientServiceImpl clientService;
 
-//    @PostMapping()
-//    public String createClient(@RequestBody ClientDto clientDTO, HttpServletRequest request) {
-//        Client client = clientService.createClient(clientDTO, request);
-//        return "client details saved successfully" + client.getId();
-//    }
+    @PostMapping()
+    public ClientDto CreateClient(@RequestBody ClientDto client) {
+    	ClientDto client2 = clientService.CreateClient(client);
+    	return client2;
+    }
 
    
 
@@ -57,26 +57,22 @@ public class ClientController {
     }
 
     @PutMapping("/{clientId}")
-    public Client updateClientStatusById( @PathVariable String clientId,@RequestBody Client clientDTO) {
-        Client c = clientService.updateClientById(clientId,clientDTO);
+    public ClientDto updateClientStatusById( @PathVariable String clientId,@RequestBody ClientDto clientDTO) {
+        ClientDto updateClientById = clientService.updateClientById(clientId, clientDTO);
         log.info(clientDTO.getStatus() + "    " + clientId);
-        return c;
+        return updateClientById;
     }
+    
+    
     @GetMapping()
-    public List<Client> getAllClients(){
+    public List<ClientsDto> getAllClients(){
 
-    	List<Client> allClients = clientService.getAllClients();
+    	List<ClientsDto> allClients = clientService.getAllClients();
     	return allClients;
     }
     
-    @PostMapping("")
-    public Client addClient(@RequestBody Client client) {
-    	Client client2 = clientService.addClient(client);
-    	return client2;
-    }
-    
     @PostMapping("/{clientid}/manager")
-    public ClientPDto addManagerToClient(@PathVariable String clientid, @RequestBody Manager manager) {
+    public ClientPDto createManagerToClient(@PathVariable String clientid, @RequestBody Manager manager) {
     	ClientPDto createClientWithManger = clientService.createClientWithManger(clientid, manager);
     	return createClientWithManger;
     	

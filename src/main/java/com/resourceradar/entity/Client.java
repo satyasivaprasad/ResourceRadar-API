@@ -48,11 +48,11 @@ public class Client {
 //	private List<Project> projects = new ArrayList<>();
 
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "client")
-	@JsonManagedReference
-	@JsonIgnore
-	private Manager manager;
-
-	
+//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "client")
+//	@JsonManagedReference
+//	@JsonIgnore
+//	private Manager manager;
+//
+//	
 
 }
