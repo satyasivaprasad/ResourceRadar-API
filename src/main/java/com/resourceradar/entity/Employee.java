@@ -95,7 +95,7 @@ public class Employee implements Serializable {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "notes", length = 750)
+    @Column(name = "notes")
     private String notes;
 
     @Column(name = "createdBy")

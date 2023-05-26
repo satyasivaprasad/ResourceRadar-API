@@ -130,5 +130,23 @@ public class ClientServiceImpl implements ClientService {
 		}
 		
 		return clientsDtos;
+	}
+
+	@Override
+	public ClientDto updateClient(ClientDto updatedClientDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ClientDto> getAllClients(String clientid, Manager manager) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ManagerDto updateClientManager(String clientId, Manager manager) {
+		// TODO Auto-generated method stub
+		return null;
 	}		
 }	
