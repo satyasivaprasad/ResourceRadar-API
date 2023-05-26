@@ -9,6 +9,8 @@ import com.resourceradar.dto.EmployeeOrgRolesDto;
 import com.resourceradar.entity.*;
 import com.resourceradar.repository.ApplicationRoleRepository;
 import com.resourceradar.repository.OrganizationRepository;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +40,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private OrganizationRepository organizationRepository;
 
+    @Autowired
+    private ModelMapper mapper;
+    
     @Override
-    public Employee createEmployee(EmployeeDto employeeDTO, HttpServletRequest request) {
+    public EmployeeDto createEmployee(EmployeeDto employeeDTO, HttpServletRequest request) {
 
         String orgId = request.getHeader("orgId");
 
@@ -83,7 +88,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         log.info("employee save successfully =====>  " + savedEmployee.getId());
-        return savedEmployee;
+        EmployeeDto map = mapper.map(savedEmployee, EmployeeDto.class);
+        return map;
     }
     @Override
     public List<Employee> getAllEmployees() {

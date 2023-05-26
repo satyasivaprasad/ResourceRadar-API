@@ -47,12 +47,6 @@ public class Validator {
         if (employeeDTO.getLocation() == null || employeeDTO.getLocation().isEmpty()) {
             throw new CustomValidationException("Location cannot be null or empty");
         }
-        if (employeeDTO.getNickname() == null || employeeDTO.getNickname().isEmpty()) {
-            throw new CustomValidationException("Nickname cannot be null or empty");
-        }
-        if (employeeDTO.getNotes() == null || employeeDTO.getNotes().isEmpty()) {
-            throw new CustomValidationException("Notes cannot be null or empty");
-        }
         if (employeeDTO.getCreatedBy() == null || employeeDTO.getCreatedBy().isEmpty()) {
             throw new CustomValidationException("Created By cannot be null or empty");
         }

@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "manager_tbl")
+@Table(name = "manager")
 @Data
 public class Manager {
 
@@ -34,10 +34,10 @@ public class Manager {
     @Column(name = "type")
     private  String type;
     
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    @JsonIgnore
-    private Project project;
+//    @ManyToOne
+//    @JoinColumn(name = "project_id")
+//    @JsonIgnore
+//    private Project project;
 
     @ManyToOne
     @JoinColumn(name = "client_id")

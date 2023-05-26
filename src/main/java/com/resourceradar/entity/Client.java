@@ -48,7 +48,7 @@ public class Client {
 //	private List<Project> projects = new ArrayList<>();
 
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "client")
+	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "client")
 	@JsonManagedReference
 	@JsonIgnore
 	private Manager manager;

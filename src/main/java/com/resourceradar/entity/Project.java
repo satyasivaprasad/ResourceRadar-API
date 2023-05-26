@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "project_tbl")
+@Table(name = "project")
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Project {
@@ -49,8 +49,9 @@ public class Project {
     private Client client;
     
     @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name = "manager_id")
-    @JsonIgnore
-    private Manager manager;
+	@JoinColumn(name = "manager_id", referencedColumnName = "id")
+	@JsonIgnore
+	private Manager manager;
+
 	
 }

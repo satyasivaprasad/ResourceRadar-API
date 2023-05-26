@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 @Data
 public class ManagerDto {
 
-  // private String id;
+	private String id;
+	
+	private String employeeId;
 
     private String name;
 
@@ -20,7 +22,5 @@ public class ManagerDto {
     private LocalDateTime createdAt;
 
     private LocalDateTime modifiedAt;
-    
-    private String clientId;
 
 }
