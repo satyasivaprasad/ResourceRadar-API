@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import com.resourceradar.dto.EmployeeOrgRolesDto;
 import com.resourceradar.dto.EmployeeSkillsDto;
-import com.resourceradar.entity.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +98,17 @@ public class EmployeeController {
             employeesDto.add(employeeDto);
         }
         return employeesDto;
+    }
+
+    @GetMapping("/reporting-managers")
+    public List<EmployeeOrgRolesDto> getReportingManagers() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        List<EmployeeOrgRolesDto> employeeOrgRolesDtos = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
+            employeeOrgRolesDtos.addAll(employeeDto.getRoles());
+        }
+        return employeeOrgRolesDtos;
     }
 
     @GetMapping(EndPointConfig.ID)
