@@ -3,7 +3,6 @@ package com.resourceradar.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +40,13 @@ public class ClientServiceImpl implements ClientService {
 	public ClientDto CreateClient(ClientDto clientdto) {
 		Client map = mapper.map(clientdto, Client.class);
 		Client client = clientRepository.save(map);
-		ManagerDto managerDto = clientdto.getManagerDto();
+		ManagerDto managerDto = clientdto.getManager();
 		Manager manager = mapper.map(managerDto, Manager.class);
 		manager.setClient(client);
 		Manager manager2 = managerRepository.save(manager);
 		ManagerDto managerDto2 = mapper.map(manager2, ManagerDto.class);
 		ClientDto clientDto2 = mapper.map(client, ClientDto.class);
-		clientDto2.setManagerDto(managerDto2);
+		clientDto2.setManager(managerDto2);
 		return clientDto2;
 	}
 	
@@ -62,11 +61,11 @@ public class ClientServiceImpl implements ClientService {
 		
 		Client cliententity = clientRepository.save(client2);
 		Manager man = managerRepository.findbyClientId(clientid);
-		man.setName(client.getManagerDto().getName());
+		man.setName(client.getManager().getName());
 		
 		Manager man2 = managerRepository.save(man);
 		ClientDto clientDto2 = mapper.map(client2, ClientDto.class);
-		clientDto2.setManagerDto(mapper.map(man2, ManagerDto.class));
+		clientDto2.setManager(mapper.map(man2, ManagerDto.class));
 		return clientDto2;
 	}
 

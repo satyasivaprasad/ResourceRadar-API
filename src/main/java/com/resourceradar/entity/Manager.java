@@ -2,6 +2,7 @@ package com.resourceradar.entity;
 
 import java.time.LocalDateTime;
 
+import com.resourceradar.model.Auditable;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "manager")
 @Data
-public class Manager {
+public class Manager extends Auditable {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -46,18 +47,6 @@ public class Manager {
     @ManyToOne
     @JoinColumn(name = "org_id")
     private Organization organization;
-    
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "modified_by")
-    private String modifiedBy;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "modified_at")
-    private LocalDateTime modifiedAt;
     
     public Manager() {
     }

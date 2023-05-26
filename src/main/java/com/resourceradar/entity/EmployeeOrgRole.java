@@ -37,6 +37,6 @@ public class EmployeeOrgRole {
     private Organization organization;
 
     @Column(name = "role_name")
-    private String name;
+    private String role;
 
 }
