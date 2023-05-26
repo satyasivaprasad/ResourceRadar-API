@@ -9,6 +9,7 @@ import com.resourceradar.entity.EmployeeSkill;
 import com.resourceradar.entity.EmployeeSkillKey;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -29,5 +30,11 @@ public interface EmployeeMapper {
     EmployeeSkillsDto mapToDto(EmployeeSkill employeeSkill);
 
     @Mapping(source = "employeeOrgRoles.roleId", target = "id")
+    @Mapping(target = "name", expression = "java(employeeOrgRole.getEmployee().getFirstName() + \" \" + employeeOrgRole.getEmployee().getLastName())")
     EmployeeOrgRolesDto mapToEmployeeOrgRolesDto(EmployeeOrgRole employeeOrgRole);
+
+    @Named("toFullName")
+    default String translateToFullName(Employee employee) {
+        return employee.getFirstName() + employee.getLastName();
+    }
 }

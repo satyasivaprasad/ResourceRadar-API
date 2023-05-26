@@ -9,5 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class EmployeeOrgRolesDto {
     private String id;
+    private String role;
+
     private String name;
 }

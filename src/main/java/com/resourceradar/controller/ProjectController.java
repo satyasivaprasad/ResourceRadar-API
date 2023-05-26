@@ -1,7 +1,13 @@
 package com.resourceradar.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.resourceradar.dto.EmployeeDto;
+import com.resourceradar.dto.EmployeeOrgRolesDto;
+import com.resourceradar.entity.Employee;
+import com.resourceradar.mapper.EmployeeMapper;
+import com.resourceradar.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +35,9 @@ public class ProjectController {
 	
 	@Autowired
 	public ProjectService projectService;
+
+	@Autowired
+	private EmployeeServiceImpl employeeService;
 
 	@PostMapping()
     public ProjectDTO createProject(@RequestBody ProjectDTO projectDTO) {
@@ -61,6 +70,18 @@ public class ProjectController {
 			return new ResponseEntity<>(projects, HttpStatus.OK);
 		}
 	}
+
+	@GetMapping("/managers")
+	public List<EmployeeOrgRolesDto> getProjectManagers() {
+		List<Employee> employees = employeeService.getAllEmployees();
+		List<EmployeeOrgRolesDto> employeeOrgRolesDtos = new ArrayList<>();
+		for (Employee employee : employees) {
+			EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
+			employeeOrgRolesDtos.addAll(employeeDto.getRoles());
+		}
+		return employeeOrgRolesDtos;
+	}
+
 //	@PostMapping("/{projectId}/manager")
 //	public ProjectPostDTO assignManagerToProject(@PathVariable String projectId, @RequestBody ManagerPostDTO managerDTO) {
 //		ProjectPostDTO project = projectService.assignManagerToProject(projectId,managerDTO);

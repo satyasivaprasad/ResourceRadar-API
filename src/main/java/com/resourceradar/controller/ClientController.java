@@ -1,7 +1,12 @@
 package com.resourceradar.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.resourceradar.dto.*;
+import com.resourceradar.entity.Employee;
+import com.resourceradar.mapper.EmployeeMapper;
+import com.resourceradar.service.impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.resourceradar.config.EndPointConfig;
-import com.resourceradar.dto.ClientDto;
-import com.resourceradar.dto.ClientPDto;
-import com.resourceradar.dto.ClientsDto;
-import com.resourceradar.dto.ManagerDto;
-import com.resourceradar.entity.Client;
 import com.resourceradar.entity.Manager;
 import com.resourceradar.service.impl.ClientServiceImpl;
 
@@ -34,13 +34,14 @@ public class ClientController {
     @Autowired
     private ClientServiceImpl clientService;
 
+    @Autowired
+    private EmployeeServiceImpl employeeService;
+
     @PostMapping()
-    public ClientDto CreateClient(@RequestBody ClientDto client) {
+    public ClientDto createClient(@RequestBody ClientDto client) {
     	ClientDto client2 = clientService.CreateClient(client);
     	return client2;
     }
-
-   
 
     @GetMapping("/{clientId}")
     public ResponseEntity<ClientsDto> getClientById(@PathVariable String clientId) {
@@ -69,6 +70,17 @@ public class ClientController {
 
     	List<ClientsDto> allClients = clientService.getAllClients();
     	return allClients;
+    }
+
+    @GetMapping("/managers")
+    public List<EmployeeOrgRolesDto> getClientManagers() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        List<EmployeeOrgRolesDto> employeeOrgRolesDtos = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
+            employeeOrgRolesDtos.addAll(employeeDto.getRoles());
+        }
+        return employeeOrgRolesDtos;
     }
     
     @PostMapping("/{clientid}/manager")

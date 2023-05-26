@@ -48,10 +48,6 @@ public class ProjectServiceImpl implements ProjectService {
 		manager.setName(managerPostDTO.getName());
 		manager.setType(managerPostDTO.getType());
 		manager.setEmployeeId(managerPostDTO.getEmployeeId());
-		manager.setCreatedAt(managerPostDTO.getCreatedAt());
-		manager.setModifiedAt(managerPostDTO.getModifiedAt());
-		manager.setCreatedBy(managerPostDTO.getCreatedBy());
-		manager.setModifiedBy(managerPostDTO.getModifiedBy());
 		Optional<Client> cli = clientRepository.findById(projectDTO.getClientId());
 		manager.setClient(cli.get());
 		Optional<Organization> org = organizationRepository.findById(projectDTO.getOrgId());
@@ -91,10 +87,6 @@ public class ProjectServiceImpl implements ProjectService {
 		manager.setName(managerPostDTO.getName());
 		manager.setType(managerPostDTO.getType());
 		manager.setEmployeeId(managerPostDTO.getEmployeeId());
-		manager.setCreatedAt(managerPostDTO.getCreatedAt());
-		manager.setModifiedAt(managerPostDTO.getModifiedAt());
-		manager.setCreatedBy(managerPostDTO.getCreatedBy());
-		manager.setModifiedBy(managerPostDTO.getModifiedBy());
 //		Optional<Client> cli = clientRepository.findById(projectDTO.getClientId());
 //		manager.setClient(cli.get());
 //		Optional<Organization> org = organizationRepository.findById(projectDTO.getOrgId());
@@ -133,10 +125,6 @@ public class ProjectServiceImpl implements ProjectService {
 			dto.setEmployeeId(project.getManager().getEmployeeId());
 			dto.setName(project.getManager().getName());
 			dto.setType(project.getManager().getType());
-			dto.setCreatedBy(project.getManager().getCreatedBy());
-			dto.setModifiedBy(project.getManager().getModifiedBy());
-			dto.setCreatedAt(project.getManager().getCreatedAt());
-			dto.setModifiedAt(project.getManager().getModifiedAt());
 			projectGetDTOResponse.setManager(dto);
 			
 			dtoResponses.add(projectGetDTOResponse);
@@ -161,10 +149,6 @@ public class ProjectServiceImpl implements ProjectService {
 		dto.setEmployeeId(project.getManager().getEmployeeId());
 		dto.setName(project.getManager().getName());
 		dto.setType(project.getManager().getType());
-		dto.setCreatedBy(project.getManager().getCreatedBy());
-		dto.setModifiedBy(project.getManager().getModifiedBy());
-		dto.setCreatedAt(project.getManager().getCreatedAt());
-		dto.setModifiedAt(project.getManager().getModifiedAt());
 		
 		projectGetDTOResponse.setManager(dto);	
 		

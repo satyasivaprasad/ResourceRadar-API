@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.resourceradar.dto.EmployeeOrgRolesDto;
 import com.resourceradar.entity.*;
@@ -78,7 +79,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 EmployeeOrgRole employeeOrgRole = new EmployeeOrgRole();
                 employeeOrgRole.setApplicationRole(s.get());
                 employeeOrgRole.setEmployee(employee);
-                employeeOrgRole.setName(employeeOrgRoleDto.getName());
+                employeeOrgRole.setRole(employeeOrgRoleDto.getRole());
                 employeeOrgRole.setOrganization(organization.get());
                 employeeOrgRoles.add(employeeOrgRole);
             }
@@ -88,8 +89,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         log.info("employee save successfully =====>  " + savedEmployee.getId());
-        EmployeeDto map = mapper.map(savedEmployee, EmployeeDto.class);
-        return map;
+        EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
+        Set<EmployeeSkillsDto> employeeSkillsDtos = employee.getSkills().stream().map((EmployeeMapper.INSTANCE::mapToDto)).collect(Collectors.toSet());
+        employeeDto.setSkills(employeeSkillsDtos);
+        Set<EmployeeOrgRolesDto> employeeOrgRolesDtos = employee.getRoles().stream().map((EmployeeMapper.INSTANCE::mapToEmployeeOrgRolesDto)).collect(Collectors.toSet());
+        employeeDto.setRoles(employeeOrgRolesDtos);
+
+        return employeeDto;
     }
     @Override
     public List<Employee> getAllEmployees() {
